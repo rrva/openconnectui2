@@ -1,0 +1,661 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		171023C927C813D800EAC415 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171023C827C813D800EAC415 /* LicenseView.swift */; };
+		176CF4D1279C38E800604C6C /* CodeSignChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CF4CF279C38B900604C6C /* CodeSignChecker.swift */; };
+		176CF4E2279C5CA800604C6C /* installHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CF4E1279C5CA800604C6C /* installHelper.swift */; };
+		176CF4E7279D6BD300604C6C /* passwords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CF4E6279D6BD300604C6C /* passwords.swift */; };
+		176CF4EA279D79B400604C6C /* LineReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 176CF4E9279D79B400604C6C /* LineReader.swift */; };
+		177882B5278A384800135919 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177882B4278A384800135919 /* main.swift */; };
+		1788499C2791E447009E536C /* PrefsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1788499B2791E447009E536C /* PrefsView.swift */; };
+		17AFD3CA279AFFF800A1315A /* ToolXService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFD3C8279AFF3900A1315A /* ToolXService.swift */; };
+		17AFD3CC279B005400A1315A /* ToolXClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFD3CB279B005400A1315A /* ToolXClient.swift */; };
+		17B30B3027C709A600E8818E /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B2F27C709A600E8818E /* WindowController.swift */; };
+		17B30B3227C70ABA00E8818E /* animateStatusbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3127C70ABA00E8818E /* animateStatusbar.swift */; };
+		17B30B3427C70B2D00E8818E /* adUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3327C70B2D00E8818E /* adUsername.swift */; };
+		17B30B3627C70EE100E8818E /* ToolXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3527C70EE100E8818E /* ToolXProtocol.swift */; };
+		17B30B3827C70F7B00E8818E /* runVpnC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3727C70F7B00E8818E /* runVpnC.swift */; };
+		17B30B3B27C70FDA00E8818E /* connectionIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3927C70FB100E8818E /* connectionIsValid.swift */; };
+		17B30B3D27C710D600E8818E /* appUpgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3C27C710D600E8818E /* appUpgrade.swift */; };
+		17B30B3F27C7114500E8818E /* ToolXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3E27C7114500E8818E /* ToolXProtocol.swift */; };
+		17B30B4127C711C000E8818E /* locateOpenConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4027C711C000E8818E /* locateOpenConnect.swift */; };
+		17B30B4327C7122200E8818E /* performUpgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4227C7122200E8818E /* performUpgrade.swift */; };
+		17B30B4527C7135900E8818E /* startOpenConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4427C7135900E8818E /* startOpenConnect.swift */; };
+		17B30B4727C714AD00E8818E /* safeShell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4627C714AD00E8818E /* safeShell.swift */; };
+		17B30B4927C714F800E8818E /* regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4827C714F800E8818E /* regexp.swift */; };
+		17B30B4B27C7161100E8818E /* stopOpenConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4A27C7161100E8818E /* stopOpenConnect.swift */; };
+		17BD60E9279A2D5000C2E4D0 /* se.rrva.OpenConnectUI2.ToolX in Embed Privileged Helper */ = {isa = PBXBuildFile; fileRef = 177882B2278A384800135919 /* se.rrva.OpenConnectUI2.ToolX */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		17C337A027A5DC09005A497D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C3379F27A5DC09005A497D /* AboutView.swift */; };
+		17C337A227A5E344005A497D /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C337A127A5E344005A497D /* Updater.swift */; };
+		17D749E7278A2A29004D43CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D749E6278A2A29004D43CF /* AppDelegate.swift */; };
+		17D749EB278A2A2A004D43CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17D749EA278A2A2A004D43CF /* Assets.xcassets */; };
+		17D749F6278A2AD9004D43CF /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D749F5278A2AD9004D43CF /* main.swift */; };
+		17D749F8278A2B35004D43CF /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D749F7278A2B35004D43CF /* LogView.swift */; };
+		17E546C02790849500FA05F4 /* VPNCleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E546BE27907DC300FA05F4 /* VPNCleanup.swift */; };
+		17E7DA3B27C280A4006CF78E /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7DA3A27C280A4006CF78E /* UpgradeView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		177882BA278A3AB000135919 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17D749DB278A2A29004D43CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 177882B1278A384800135919;
+			remoteInfo = ToolX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		17BD60E7279A2C7000C2E4D0 /* Embed Privileged Helper */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchServices;
+			dstSubfolderSpec = 1;
+			files = (
+				17BD60E9279A2D5000C2E4D0 /* se.rrva.OpenConnectUI2.ToolX in Embed Privileged Helper */,
+			);
+			name = "Embed Privileged Helper";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		171023C827C813D800EAC415 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		176CF4CF279C38B900604C6C /* CodeSignChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeSignChecker.swift; sourceTree = "<group>"; };
+		176CF4E1279C5CA800604C6C /* installHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = installHelper.swift; sourceTree = "<group>"; };
+		176CF4E6279D6BD300604C6C /* passwords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = passwords.swift; sourceTree = "<group>"; };
+		176CF4E9279D79B400604C6C /* LineReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineReader.swift; sourceTree = "<group>"; };
+		177882B2278A384800135919 /* se.rrva.OpenConnectUI2.ToolX */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = se.rrva.OpenConnectUI2.ToolX; sourceTree = BUILT_PRODUCTS_DIR; };
+		177882B4278A384800135919 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		177882B9278A389F00135919 /* ToolX.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToolX.entitlements; sourceTree = "<group>"; };
+		1788499B2791E447009E536C /* PrefsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrefsView.swift; sourceTree = "<group>"; };
+		17A827B1279F47AD0000F96B /* Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Debug.plist"; sourceTree = "<group>"; };
+		17A827B2279F47BD0000F96B /* Info-Debug.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Debug.plist"; sourceTree = "<group>"; };
+		17AFD3C8279AFF3900A1315A /* ToolXService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXService.swift; sourceTree = "<group>"; };
+		17AFD3CB279B005400A1315A /* ToolXClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXClient.swift; sourceTree = "<group>"; };
+		17B30B2F27C709A600E8818E /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
+		17B30B3127C70ABA00E8818E /* animateStatusbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animateStatusbar.swift; sourceTree = "<group>"; };
+		17B30B3327C70B2D00E8818E /* adUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adUsername.swift; sourceTree = "<group>"; };
+		17B30B3527C70EE100E8818E /* ToolXProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXProtocol.swift; sourceTree = "<group>"; };
+		17B30B3727C70F7B00E8818E /* runVpnC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = runVpnC.swift; sourceTree = "<group>"; };
+		17B30B3927C70FB100E8818E /* connectionIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectionIsValid.swift; sourceTree = "<group>"; };
+		17B30B3C27C710D600E8818E /* appUpgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUpgrade.swift; sourceTree = "<group>"; };
+		17B30B3E27C7114500E8818E /* ToolXProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXProtocol.swift; sourceTree = "<group>"; };
+		17B30B4027C711C000E8818E /* locateOpenConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locateOpenConnect.swift; sourceTree = "<group>"; };
+		17B30B4227C7122200E8818E /* performUpgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = performUpgrade.swift; sourceTree = "<group>"; };
+		17B30B4427C7135900E8818E /* startOpenConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = startOpenConnect.swift; sourceTree = "<group>"; };
+		17B30B4627C714AD00E8818E /* safeShell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = safeShell.swift; sourceTree = "<group>"; };
+		17B30B4827C714F800E8818E /* regexp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = regexp.swift; sourceTree = "<group>"; };
+		17B30B4A27C7161100E8818E /* stopOpenConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stopOpenConnect.swift; sourceTree = "<group>"; };
+		17BD60E3279A17B000C2E4D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17BD60E4279A188800C2E4D0 /* ToolX-Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ToolX-Launchd.plist"; sourceTree = "<group>"; };
+		17C3379F27A5DC09005A497D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		17C337A127A5E344005A497D /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
+		17D749E3278A2A29004D43CF /* OpenConnectUI2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenConnectUI2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17D749E6278A2A29004D43CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		17D749EA278A2A2A004D43CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		17D749EF278A2A2A004D43CF /* OpenConnectUI2.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenConnectUI2.entitlements; sourceTree = "<group>"; };
+		17D749F5278A2AD9004D43CF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		17D749F7278A2B35004D43CF /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		17D749F9278A2CC7004D43CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		17E546BE27907DC300FA05F4 /* VPNCleanup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNCleanup.swift; sourceTree = "<group>"; };
+		17E7DA3A27C280A4006CF78E /* UpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		177882AF278A384800135919 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17D749E0278A2A29004D43CF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		177882B3278A384800135919 /* ToolX */ = {
+			isa = PBXGroup;
+			children = (
+				177882B9278A389F00135919 /* ToolX.entitlements */,
+				17B30B3E27C7114500E8818E /* ToolXProtocol.swift */,
+				17AFD3C8279AFF3900A1315A /* ToolXService.swift */,
+				176CF4CF279C38B900604C6C /* CodeSignChecker.swift */,
+				17E546BE27907DC300FA05F4 /* VPNCleanup.swift */,
+				17BD60E3279A17B000C2E4D0 /* Info.plist */,
+				17BD60E4279A188800C2E4D0 /* ToolX-Launchd.plist */,
+				177882B4278A384800135919 /* main.swift */,
+				17A827B1279F47AD0000F96B /* Info-Debug.plist */,
+				17B30B3927C70FB100E8818E /* connectionIsValid.swift */,
+				17B30B3727C70F7B00E8818E /* runVpnC.swift */,
+				17B30B3C27C710D600E8818E /* appUpgrade.swift */,
+				17B30B4227C7122200E8818E /* performUpgrade.swift */,
+				17B30B4027C711C000E8818E /* locateOpenConnect.swift */,
+				17B30B4427C7135900E8818E /* startOpenConnect.swift */,
+				17B30B4627C714AD00E8818E /* safeShell.swift */,
+				17B30B4827C714F800E8818E /* regexp.swift */,
+				17B30B4A27C7161100E8818E /* stopOpenConnect.swift */,
+			);
+			path = ToolX;
+			sourceTree = "<group>";
+		};
+		17D749DA278A2A29004D43CF = {
+			isa = PBXGroup;
+			children = (
+				17D749E5278A2A29004D43CF /* OpenConnectUI2 */,
+				177882B3278A384800135919 /* ToolX */,
+				17D749E4278A2A29004D43CF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		17D749E4278A2A29004D43CF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17D749E3278A2A29004D43CF /* OpenConnectUI2.app */,
+				177882B2278A384800135919 /* se.rrva.OpenConnectUI2.ToolX */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17D749E5278A2A29004D43CF /* OpenConnectUI2 */ = {
+			isa = PBXGroup;
+			children = (
+				17D749F9278A2CC7004D43CF /* Info.plist */,
+				17D749E6278A2A29004D43CF /* AppDelegate.swift */,
+				17D749EA278A2A2A004D43CF /* Assets.xcassets */,
+				17D749EF278A2A2A004D43CF /* OpenConnectUI2.entitlements */,
+				17D749F5278A2AD9004D43CF /* main.swift */,
+				17D749F7278A2B35004D43CF /* LogView.swift */,
+				1788499B2791E447009E536C /* PrefsView.swift */,
+				17C3379F27A5DC09005A497D /* AboutView.swift */,
+				171023C827C813D800EAC415 /* LicenseView.swift */,
+				17E7DA3A27C280A4006CF78E /* UpgradeView.swift */,
+				17AFD3CB279B005400A1315A /* ToolXClient.swift */,
+				17B30B3527C70EE100E8818E /* ToolXProtocol.swift */,
+				176CF4E1279C5CA800604C6C /* installHelper.swift */,
+				176CF4E6279D6BD300604C6C /* passwords.swift */,
+				176CF4E9279D79B400604C6C /* LineReader.swift */,
+				17C337A127A5E344005A497D /* Updater.swift */,
+				17A827B2279F47BD0000F96B /* Info-Debug.plist */,
+				17B30B2F27C709A600E8818E /* WindowController.swift */,
+				17B30B3127C70ABA00E8818E /* animateStatusbar.swift */,
+				17B30B3327C70B2D00E8818E /* adUsername.swift */,
+			);
+			path = OpenConnectUI2;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		177882B1278A384800135919 /* ToolX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 177882B6278A384800135919 /* Build configuration list for PBXNativeTarget "ToolX" */;
+			buildPhases = (
+				177882AE278A384800135919 /* Sources */,
+				177882AF278A384800135919 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToolX;
+			productName = ToolX;
+			productReference = 177882B2278A384800135919 /* se.rrva.OpenConnectUI2.ToolX */;
+			productType = "com.apple.product-type.tool";
+		};
+		17D749E2278A2A29004D43CF /* OpenConnectUI2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17D749F2278A2A2A004D43CF /* Build configuration list for PBXNativeTarget "OpenConnectUI2" */;
+			buildPhases = (
+				17D749DF278A2A29004D43CF /* Sources */,
+				17D749E0278A2A29004D43CF /* Frameworks */,
+				17D749E1278A2A29004D43CF /* Resources */,
+				17BD60E7279A2C7000C2E4D0 /* Embed Privileged Helper */,
+				176CF4E4279C8EDF00604C6C /* Increment Build Number */,
+				171023CA27C8160D00EAC415 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				177882BB278A3AB000135919 /* PBXTargetDependency */,
+			);
+			name = OpenConnectUI2;
+			productName = OpenConnectUI2;
+			productReference = 17D749E3278A2A29004D43CF /* OpenConnectUI2.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17D749DB278A2A29004D43CF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					177882B1278A384800135919 = {
+						CreatedOnToolsVersion = 13.2;
+					};
+					17D749E2278A2A29004D43CF = {
+						CreatedOnToolsVersion = 13.2;
+					};
+				};
+			};
+			buildConfigurationList = 17D749DE278A2A29004D43CF /* Build configuration list for PBXProject "OpenConnectUI2" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 17D749DA278A2A29004D43CF;
+			productRefGroup = 17D749E4278A2A29004D43CF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17D749E2278A2A29004D43CF /* OpenConnectUI2 */,
+				177882B1278A384800135919 /* ToolX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17D749E1278A2A29004D43CF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17D749EB278A2A2A004D43CF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		171023CA27C8160D00EAC415 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/libexec/PlistBuddy -c \"Set :license string $(cat LICENSE)\" ${INFOPLIST_FILE}\n";
+		};
+		176CF4E4279C8EDF00604C6C /* Increment Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Increment Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/bash;
+			shellScript = "agvtool next-version -all && xcrun agvtool new-marketing-version \\\"1.$(agvtool what-version | sed -n 2p |tr -d ' ')\\\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		177882AE278A384800135919 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B30B4327C7122200E8818E /* performUpgrade.swift in Sources */,
+				177882B5278A384800135919 /* main.swift in Sources */,
+				176CF4D1279C38E800604C6C /* CodeSignChecker.swift in Sources */,
+				17B30B4127C711C000E8818E /* locateOpenConnect.swift in Sources */,
+				17B30B4B27C7161100E8818E /* stopOpenConnect.swift in Sources */,
+				17B30B3B27C70FDA00E8818E /* connectionIsValid.swift in Sources */,
+				17B30B4927C714F800E8818E /* regexp.swift in Sources */,
+				17B30B4727C714AD00E8818E /* safeShell.swift in Sources */,
+				17AFD3CA279AFFF800A1315A /* ToolXService.swift in Sources */,
+				17B30B3827C70F7B00E8818E /* runVpnC.swift in Sources */,
+				17B30B3D27C710D600E8818E /* appUpgrade.swift in Sources */,
+				17B30B3F27C7114500E8818E /* ToolXProtocol.swift in Sources */,
+				17E546C02790849500FA05F4 /* VPNCleanup.swift in Sources */,
+				17B30B4527C7135900E8818E /* startOpenConnect.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17D749DF278A2A29004D43CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				176CF4E7279D6BD300604C6C /* passwords.swift in Sources */,
+				17B30B3227C70ABA00E8818E /* animateStatusbar.swift in Sources */,
+				17B30B3027C709A600E8818E /* WindowController.swift in Sources */,
+				17AFD3CC279B005400A1315A /* ToolXClient.swift in Sources */,
+				17B30B3427C70B2D00E8818E /* adUsername.swift in Sources */,
+				17D749E7278A2A29004D43CF /* AppDelegate.swift in Sources */,
+				1788499C2791E447009E536C /* PrefsView.swift in Sources */,
+				17C337A027A5DC09005A497D /* AboutView.swift in Sources */,
+				176CF4E2279C5CA800604C6C /* installHelper.swift in Sources */,
+				17D749F8278A2B35004D43CF /* LogView.swift in Sources */,
+				171023C927C813D800EAC415 /* LicenseView.swift in Sources */,
+				17B30B3627C70EE100E8818E /* ToolXProtocol.swift in Sources */,
+				176CF4EA279D79B400604C6C /* LineReader.swift in Sources */,
+				17D749F6278A2AD9004D43CF /* main.swift in Sources */,
+				17C337A227A5E344005A497D /* Updater.swift in Sources */,
+				17E7DA3B27C280A4006CF78E /* UpgradeView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		177882BB278A3AB000135919 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 177882B1278A384800135919 /* ToolX */;
+			targetProxy = 177882BA278A3AB000135919 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		177882B7278A384800135919 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = ToolX/ToolX.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 615;
+				DEVELOPMENT_TEAM = 3563RJWBQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = "ToolX/Info-Debug.plist";
+				MACOSX_DEPLOYMENT_TARGET = 11;
+				MARKETING_VERSION = "";
+				NEW_SETTING = "";
+				OTHER_CODE_SIGN_FLAGS = "$(inherited) -i $(PRODUCT_BUNDLE_IDENTIFIER)";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"$(SRCROOT)/${TARGET_NAME}/ToolX-Launchd.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = se.rrva.OpenConnectUI2.ToolX;
+				PRODUCT_MODULE_NAME = ToolX;
+				PRODUCT_NAME = se.rrva.OpenConnectUI2.ToolX;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		177882B8278A384800135919 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = ToolX/ToolX.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				CURRENT_PROJECT_VERSION = 615;
+				DEVELOPMENT_TEAM = 3563RJWBQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = ToolX/Info.plist;
+				MACOSX_DEPLOYMENT_TARGET = 11;
+				MARKETING_VERSION = "";
+				NEW_SETTING = "";
+				OTHER_CODE_SIGN_FLAGS = "$(inherited) -i $(PRODUCT_BUNDLE_IDENTIFIER)";
+				OTHER_LDFLAGS = (
+					"-sectcreate",
+					__TEXT,
+					__launchd_plist,
+					"$(SRCROOT)/${TARGET_NAME}/ToolX-Launchd.plist",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = se.rrva.OpenConnectUI2.ToolX;
+				PRODUCT_MODULE_NAME = ToolX;
+				PRODUCT_NAME = se.rrva.OpenConnectUI2.ToolX;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		17D749F0278A2A2A004D43CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		17D749F1278A2A2A004D43CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		17D749F3278A2A2A004D43CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenConnectUI2/OpenConnectUI2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 615;
+				DEVELOPMENT_TEAM = 3563RJWBQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "OpenConnectUI2/Info-Debug.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11;
+				MARKETING_VERSION = "";
+				PRODUCT_BUNDLE_IDENTIFIER = se.rrva.OpenConnectUI2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		17D749F4278A2A2A004D43CF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
+				CODE_SIGN_ENTITLEMENTS = OpenConnectUI2/OpenConnectUI2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 615;
+				DEVELOPMENT_TEAM = 3563RJWBQP;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OpenConnectUI2/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11;
+				MARKETING_VERSION = "";
+				PRODUCT_BUNDLE_IDENTIFIER = se.rrva.OpenConnectUI2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		177882B6278A384800135919 /* Build configuration list for PBXNativeTarget "ToolX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				177882B7278A384800135919 /* Debug */,
+				177882B8278A384800135919 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17D749DE278A2A29004D43CF /* Build configuration list for PBXProject "OpenConnectUI2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17D749F0278A2A2A004D43CF /* Debug */,
+				17D749F1278A2A2A004D43CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17D749F2278A2A2A004D43CF /* Build configuration list for PBXNativeTarget "OpenConnectUI2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17D749F3278A2A2A004D43CF /* Debug */,
+				17D749F4278A2A2A004D43CF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 17D749DB278A2A29004D43CF /* Project object */;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleIdentifier</key>
+	<string>se.rrva.OpenConnectUI2.ToolX</string>
+	<key>CFBundleName</key>
+	<string>ToolX</string>
+	<key>SMAuthorizedClients</key>
+	<array>
+		<string>identifier &quot;se.rrva.OpenConnectUI2&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Apple Development: ragnar.rova@gmail.com (U34QC433V8)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>615</string>
+	<key>CFBundleShortVersionString</key>
+	<string>"1.615"</string>
+</dict>
+</plist>
