@@ -30,3 +30,8 @@ brew install openconnect
 
 
 5. Go to Preferences and fill out your login details. Password will be stored in your system keychain.
+
+# Known issues
+
+Does not invoke vpn-script to tear down a connection. Performs some network config cleanup of its own
+which might not be enough. Please report any problems with this. 
