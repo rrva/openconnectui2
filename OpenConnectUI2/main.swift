@@ -1,7 +1,10 @@
 import Cocoa
 import Foundation
+import Network
+import SwiftUI
 
 func main() {
+
   let app = NSApplication.shared
 
   let authorized = DispatchSemaphore(value: 1)

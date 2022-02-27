@@ -16,55 +16,82 @@ class AboutViewVisibility: ObservableObject {
 struct AboutView: View {
   @EnvironmentObject private var visibility: AboutViewVisibility
   var body: some View {
-    VStack(spacing: 16) {
+    VStack {
       if !visibility.showLicense {
-        AboutView2().environmentObject(visibility)
+        FirstAboutView().environmentObject(visibility)
       }
       if visibility.showLicense {
         Spacer()
         LicenseView().environmentObject(visibility)
         Spacer()
       }
-    }.frame(minWidth: 400, maxWidth: .infinity, minHeight: 400, maxHeight: 400)
+    }.frame(minWidth: 600, maxWidth: .infinity, minHeight: 400, maxHeight: 400)
   }
 }
 
-struct AboutView2: View {
+struct FirstAboutView: View {
   @EnvironmentObject private var visibility: AboutViewVisibility
 
-  let version = String(
-    describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion").unsafelyUnwrapped)
-
   var body: some View {
-    Text(
-      """
-      **OpenConnectUI2 version \(version)**
+    VStack(alignment: .center, spacing: 30) {
+      Spacer()
+      Text("OpenConnectUI2").font(.largeTitle)
+      HStack(alignment: .top, spacing: 20) {
+        VStack {
+          appImage().padding(10)
+          Text("version \(version)")
+        }
+        aboutText
 
-      A Mac OSX UI for [OpenConnect VPN client](https://www.infradead.org/openconnect/)
+      }
+      Button(action: {
+        visibility.showLicense = true
+      }) {
+        Text("License")
 
-      Standing on the shoulders of giants:
-
-      Thank you to the OpenConnect authors for the vpn client
-
-      OpenConnect questions:
-
-      [http://www.infradead.org/openconnect/mail.html](http://www.infradead.org/openconnect/mail.html)
-
-      Copyright © 2022 Ragnar Rova
-
-      [Source code on GitHub](https://github.com/rrva/openconnectui2)
-      """
-    ).multilineTextAlignment(.center).padding(16)
-    Button(action: {
-      visibility.showLicense = true
-    }) {
-      Text("License")
-    }.padding(16)
-  }
-
-  struct AboutView_Previews: PreviewProvider {
-    static var previews: some View {
-      AboutView()
+      }
+      Spacer()
     }
+
   }
+
+}
+
+let version = String(
+  describing: Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion").unsafelyUnwrapped)
+
+let aboutText = Text(
+  """
+  A Mac OSX UI for [OpenConnect VPN client](https://www.infradead.org/openconnect/)
+
+  Standing on the shoulders of giants:
+
+  Thank you to the OpenConnect authors for the vpn client!
+
+  For OpenConnect questions please go to:
+
+  [http://www.infradead.org/openconnect/mail.html](http://www.infradead.org/openconnect/mail.html)
+
+  [Source code on GitHub](https://github.com/rrva/openconnectui2)
+
+  © 2022 Ragnar Rova
+  """
+)
+
+func appIconImageRep() -> NSImageRep {
+  let appIconPath = Bundle.main.path(forResource: "AppIcon", ofType: "icns")!
+  let appIcon = NSImage(contentsOfFile: appIconPath)
+  let images = appIcon!.representations.sorted(by: { (a: NSImageRep, b: NSImageRep) -> Bool in
+    return a.pixelsHigh < b.pixelsHigh
+  })
+  return images[images.endIndex - 1]
+
+}
+
+let bestImage = appIconImageRep()
+
+func appImage() -> Image {
+  let image: NSImage = NSImage(size: bestImage.size)
+  image.addRepresentation(bestImage)
+  return Image(nsImage: image)
 }

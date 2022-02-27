@@ -90,6 +90,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   @objc func didTapConnect() {
     let host = prefsView.getUserSettings().host
     let adUserName = prefsView.getUserSettings().username
+
     if adUserName == "" || host == "" {
       if prefsWindowController == nil {
         prefsWindowController = WindowController(hostedView: PrefsView(logger: logger))
