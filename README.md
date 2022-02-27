@@ -2,10 +2,6 @@
 
 A Mac OSX menubar app to control [Openconnect VPN](https://www.infradead.org/openconnect/)
 
-Copyright 2022 Ragnar Rova
-
-Licensed under the MIT license
-
 # Screenshots
 
 <img width="192" alt="Screenshot 2022-02-25 at 07 49 35" src="https://user-images.githubusercontent.com/887132/155668965-aa700e12-c019-429b-9315-7c53e342ad44.png">
@@ -35,3 +31,9 @@ brew install openconnect
 
 Does not invoke vpn-script to tear down a connection. Performs some network config cleanup of its own
 which might not be enough. Please report any problems with this. 
+
+# License
+
+Copyright 2022 Ragnar Rova
+
+Licensed under the MIT license
