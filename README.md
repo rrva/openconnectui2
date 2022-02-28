@@ -22,7 +22,7 @@ brew install openconnect
 
 4. The app is just a menu bar app. Look for this icon in the menu bar:
 
-<img width="32" alt="Screenshot 2022-02-25 at 07 59 52" src="https://user-images.githubusercontent.com/887132/155669653-5c88dbea-cc22-4baf-a286-3dd8dfea9afb.png">
+    <img width="32" alt="Screenshot 2022-02-25 at 07 59 52" src="https://user-images.githubusercontent.com/887132/155669653-5c88dbea-cc22-4baf-a286-3dd8dfea9afb.png">
 
 
 5. Go to Preferences and fill out your login details. Password will be stored in your system keychain.
