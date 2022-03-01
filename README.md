@@ -1,6 +1,6 @@
 # OpenConnectUI2
 
-A Mac OSX menubar app to control [Openconnect VPN](https://www.infradead.org/openconnect/)
+A macOS menubar app to control [Openconnect VPN](https://www.infradead.org/openconnect/)
 
 # Screenshots
 
