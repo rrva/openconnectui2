@@ -1,15 +1,13 @@
 import Foundation
 
-var service: ToolXProtocol? = createToolXRemoteService()
-
-func createToolXRemoteService() -> ToolXProtocol? {
+func service() -> ToolXProtocol? {
   let connection = NSXPCConnection(machServiceName: "se.rrva.OpenConnectUI2.ToolX")
   connection.remoteObjectInterface = NSXPCInterface(with: ToolXProtocol.self)
   connection.resume()
 
   let service =
     connection.remoteObjectProxyWithErrorHandler { error in
-      logger.log("killHelper got error: \(error)")
+      logger.log("createToolXRemoteService got error: \(error)")
     } as? ToolXProtocol
   return service
 }
@@ -17,7 +15,7 @@ func createToolXRemoteService() -> ToolXProtocol? {
 func performUpgrade(download: FileHandle, downloadSize: Int, logs: Logs, upgrade: Upgrade) {
 
   if #available(macOS 10.15.4, *) {
-    service?.upgrade(
+    service()?.upgrade(
       download: download, downloadSize: downloadSize, appLocation: Bundle.main.bundleURL,
       pid: ProcessInfo.processInfo.processIdentifier,
       user: getuid()
@@ -49,19 +47,22 @@ func performUpgrade(download: FileHandle, downloadSize: Int, logs: Logs, upgrade
 }
 
 func killHelper() {
-  service?.die()
+  service()?.die()
 }
 
 func isHelperInstalled(reply: @escaping (Bool) -> Void) {
   if let version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
-    service?.version { response in
+    service()?.version { response in
       logger.log("Helper version installed: \(response) app version: \(version)")
       if version == response {
         reply(true)
+        return
       } else {
         reply(false)
+        return
       }
     }
+    reply(false)
   }
 }
 
@@ -76,7 +77,7 @@ func removeDNSAndVPNInterface() {
   let tunDev = UserDefaults.standard.object(forKey: "lastTunDev") as? String ?? ""
   let internalIp4Address =
     UserDefaults.standard.object(forKey: "lastInternalIp4Address") as? String ?? ""
-  service?.removeDNSAndVPNInterface(
+  service()?.removeDNSAndVPNInterface(
     vpnGateway: vpnGateway, tunDev: tunDev, internalIp4Address: internalIp4Address
   ) { response in
     logger.log(response)
@@ -84,7 +85,7 @@ func removeDNSAndVPNInterface() {
 }
 
 func stopOpenConnect() {
-  service?.stopOpenConnect { _ in
+  service()?.stopOpenConnect { _ in
     logger.log("openconnect stopped")
   }
 }
@@ -94,7 +95,7 @@ func startOpenConnect(
   host: String,
   withReply reply: @escaping (Bool) -> Void
 ) {
-  service?.startOpenConnect(
+  service()?.startOpenConnect(
     localUser: localUser, username: username, password: password, vpnHost: host
   ) { response in
     guard let reader = LineReader(fileHandle: response) else {
