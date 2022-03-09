@@ -51,17 +51,22 @@ func killHelper() {
 }
 
 func isHelperInstalled(reply: @escaping (Bool) -> Void) {
+  let versionChecked = DispatchSemaphore(value: 0)
   if let version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
     service()?.version { response in
       logger.log("Helper version installed: \(response) app version: \(version)")
       if version == response {
+        versionChecked.signal()
         reply(true)
-        return
       } else {
+        versionChecked.signal()
         reply(false)
-        return
       }
     }
+  }
+  let result = versionChecked.wait(timeout: .now() + 1.0)
+  if result == DispatchTimeoutResult.timedOut {
+    logger.log("Helper version unknown")
     reply(false)
   }
 }

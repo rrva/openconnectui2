@@ -7,15 +7,14 @@ func main() {
 
   let app = NSApplication.shared
 
-  let authorized = DispatchSemaphore(value: 1)
-  let installed = DispatchSemaphore(value: 1)
+  let authorized = DispatchSemaphore(value: 0)
+  let installed = DispatchSemaphore(value: 0)
 
   checkHelperInstallation { isInstalled in
-    if CommandLine.isDevBuild || isInstalled == false {
+    if isInstalled == false {
       logger.log("Installing helper")
       installHelper(authorized: authorized, installed: installed)
     } else {
-      logger.log("Helper already installed")
       authorized.signal()
       installed.signal()
     }
