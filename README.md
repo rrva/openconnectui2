@@ -1,10 +1,6 @@
-# OpenconnectUI2
+# OpenConnectUI2
 
-A Mac OSX menubar app to control [Openconnect VPN](https://www.infradead.org/openconnect/)
-
-Copyright 2022 Ragnar Rova
-
-Licensed under the MIT license
+A macOS menubar app to control [Openconnect VPN](https://www.infradead.org/openconnect/)
 
 # Screenshots
 
@@ -26,7 +22,18 @@ brew install openconnect
 
 4. The app is just a menu bar app. Look for this icon in the menu bar:
 
-<img width="32" alt="Screenshot 2022-02-25 at 07 59 52" src="https://user-images.githubusercontent.com/887132/155669653-5c88dbea-cc22-4baf-a286-3dd8dfea9afb.png">
+    <img width="32" alt="Screenshot 2022-02-25 at 07 59 52" src="https://user-images.githubusercontent.com/887132/155669653-5c88dbea-cc22-4baf-a286-3dd8dfea9afb.png">
 
 
 5. Go to Preferences and fill out your login details. Password will be stored in your system keychain.
+
+# Known issues
+
+Does not invoke vpn-script to tear down a connection. Performs some network config cleanup of its own
+which might not be enough. Please report any problems with this. 
+
+# License
+
+Copyright 2022 Ragnar Rova
+
+Licensed under the MIT license
