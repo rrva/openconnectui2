@@ -15,6 +15,7 @@ struct UpgradeView: View {
 
   var body: some View {
     VStack {
+      Text("OpenConnect updater").padding()
       Text(upgrade.message).padding()
       ProgressView(upgrade.action, value: upgrade.progress, total: 100)
       if upgrade.isRestartButtonVisible {

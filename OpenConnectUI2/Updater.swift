@@ -36,7 +36,7 @@ func newVersionAvailable(logs: Logs, _ block: @escaping (PublishedVersion) -> Vo
           return
         }
         let latestVersion = Int(publishedVersion.latest) ?? 0
-        if latestVersion > runningVersion {
+        if latestVersion > runningVersion || true {
           logs.log("Latest version: \(latestVersion)")
           logs.log("Running version: \(runningVersion)")
           block(publishedVersion)

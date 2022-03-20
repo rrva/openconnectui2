@@ -2,6 +2,9 @@ import AppKit
 import Foundation
 
 class ToolXService: NSObject, ToolXProtocol {
+  func openConnectPid(withReply reply: @escaping (pid_t) -> Void) {
+    reply(findOpenConnectPid())
+  }
 
   @available(macOS 10.15.4, *)
   func upgrade(

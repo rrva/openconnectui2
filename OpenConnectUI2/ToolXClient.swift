@@ -106,16 +106,24 @@ func startOpenConnect(
     guard let reader = LineReader(fileHandle: response) else {
       return
     }
+
     reader.forEach { line in
       logger.log(
         maskPassword(line.trimmingCharacters(in: .whitespacesAndNewlines), password: password))
       if line.starts(with: "openconnect not found") {
-        reply(false)
-      }
-      if line.starts(with: "Established") {
+          reply(false)
+        }
+        if line.starts(with: "Established") {
+          service()?.openConnectPid { pid in
+            logger.log("PID \(pid)")
+          noteExit(pid: pid, withReply: reply)
+        }
         reply(true)
       }
       if line.starts(with: "Reconnect failed") {
+        reply(false)
+      }
+      if line.starts(with: "Session terminated by server; exiting.") {
         reply(false)
       }
       if line.contains("fgets (stdin): Resource temporarily unavailable") {

@@ -31,6 +31,8 @@
 		17B30B4927C714F800E8818E /* regexp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4827C714F800E8818E /* regexp.swift */; };
 		17B30B4B27C7161100E8818E /* stopOpenConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B4A27C7161100E8818E /* stopOpenConnect.swift */; };
 		17BD60E9279A2D5000C2E4D0 /* se.rrva.OpenConnectUI2.ToolX in Embed Privileged Helper */ = {isa = PBXBuildFile; fileRef = 177882B2278A384800135919 /* se.rrva.OpenConnectUI2.ToolX */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		17C2BEDD27E77E75007D0916 /* openConnectPid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2BEDC27E77E75007D0916 /* openConnectPid.swift */; };
+		17C2BEDF27E7A970007D0916 /* noteExit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C2BEDE27E7A970007D0916 /* noteExit.swift */; };
 		17C337A027A5DC09005A497D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C3379F27A5DC09005A497D /* AboutView.swift */; };
 		17C337A227A5E344005A497D /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C337A127A5E344005A497D /* Updater.swift */; };
 		17CDB73627C943DC00147E76 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 17BD60E3279A17B000C2E4D0 /* Info.plist */; };
@@ -96,6 +98,8 @@
 		17B30B4A27C7161100E8818E /* stopOpenConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stopOpenConnect.swift; sourceTree = "<group>"; };
 		17BD60E3279A17B000C2E4D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17BD60E4279A188800C2E4D0 /* ToolX-Launchd.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ToolX-Launchd.plist"; sourceTree = "<group>"; };
+		17C2BEDC27E77E75007D0916 /* openConnectPid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = openConnectPid.swift; sourceTree = "<group>"; };
+		17C2BEDE27E7A970007D0916 /* noteExit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = noteExit.swift; sourceTree = "<group>"; };
 		17C3379F27A5DC09005A497D /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		17C337A127A5E344005A497D /* Updater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		17D749E3278A2A29004D43CF /* OpenConnectUI2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenConnectUI2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,6 +152,7 @@
 				17B30B4627C714AD00E8818E /* safeShell.swift */,
 				17B30B4827C714F800E8818E /* regexp.swift */,
 				17B30B4A27C7161100E8818E /* stopOpenConnect.swift */,
+				17C2BEDC27E77E75007D0916 /* openConnectPid.swift */,
 			);
 			path = ToolX;
 			sourceTree = "<group>";
@@ -193,6 +198,7 @@
 				17B30B2F27C709A600E8818E /* WindowController.swift */,
 				17B30B3127C70ABA00E8818E /* animateStatusbar.swift */,
 				17B30B3327C70B2D00E8818E /* adUsername.swift */,
+				17C2BEDE27E7A970007D0916 /* noteExit.swift */,
 			);
 			path = OpenConnectUI2;
 			sourceTree = "<group>";
@@ -309,7 +315,7 @@
 		176CF4E4279C8EDF00604C6C /* Increment Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -321,7 +327,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "agvtool next-version -all ; xcrun agvtool new-marketing-version \\\"1.$(agvtool what-version | sed -n 2p |tr -d ' ')\\\"\n";
 		};
@@ -335,6 +341,7 @@
 				17B30B4327C7122200E8818E /* performUpgrade.swift in Sources */,
 				177882B5278A384800135919 /* main.swift in Sources */,
 				176CF4D1279C38E800604C6C /* CodeSignChecker.swift in Sources */,
+				17C2BEDD27E77E75007D0916 /* openConnectPid.swift in Sources */,
 				17B30B4127C711C000E8818E /* locateOpenConnect.swift in Sources */,
 				17B30B4B27C7161100E8818E /* stopOpenConnect.swift in Sources */,
 				17B30B3B27C70FDA00E8818E /* connectionIsValid.swift in Sources */,
@@ -365,6 +372,7 @@
 				17D749F8278A2B35004D43CF /* LogView.swift in Sources */,
 				171023C927C813D800EAC415 /* LicenseView.swift in Sources */,
 				17B30B3627C70EE100E8818E /* ToolXProtocol.swift in Sources */,
+				17C2BEDF27E7A970007D0916 /* noteExit.swift in Sources */,
 				176CF4EA279D79B400604C6C /* LineReader.swift in Sources */,
 				17D749F6278A2AD9004D43CF /* main.swift in Sources */,
 				17C337A227A5E344005A497D /* Updater.swift in Sources */,
@@ -392,7 +400,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 642;
+				CURRENT_PROJECT_VERSION = 654;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "ToolX/Info-Debug.plist";
@@ -425,7 +433,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 642;
+				CURRENT_PROJECT_VERSION = 654;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = ToolX/Info.plist;
@@ -574,7 +582,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 642;
+				CURRENT_PROJECT_VERSION = 654;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -607,7 +615,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 642;
+				CURRENT_PROJECT_VERSION = 654;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;

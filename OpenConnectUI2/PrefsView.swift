@@ -57,9 +57,9 @@ class UserSettings: ObservableObject {
     didSet {
       let result = addOrUpdatePassword("openconnect", account: username, password: password)
       if result == false {
-        print("Failed adding or updating password")
+        logger.log("Failed adding or updating password")
       } else {
-        print("Password updated")
+        logger.log("Password updated")
       }
     }
   }

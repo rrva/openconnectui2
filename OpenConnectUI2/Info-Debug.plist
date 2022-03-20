@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleShortVersionString</key>
-	<string>"1.642"</string>
+	<string>"1.654"</string>
 	<key>CFBundleVersion</key>
-	<string>642</string>
+	<string>654</string>
 	<key>LSUIElement</key>
 	<true/>
 	<key>SMPrivilegedExecutables</key>
