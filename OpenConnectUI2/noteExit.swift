@@ -30,6 +30,7 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
       } else {
         logger.log("Error reading kevent")
         close(procKqueue)
+        break
       }
     }
   }
