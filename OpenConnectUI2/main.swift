@@ -10,8 +10,7 @@ func main() {
   do {
     let resourceValues = try Bundle.main.bundleURL.resourceValues(forKeys: [.volumeIsReadOnlyKey])
     if (resourceValues.volumeIsReadOnly ?? false) == true {
-      modalDialog(messageText: "Read-only app location", informativeText: "Please move this app to the Applications folder and open it from there")
-      app.terminate(nil)
+      modalDialog(messageText: "Read-only app location", informativeText: "Please move this app to the Applications folder and open it from there to allow updates")
     }
   } catch {
     print(error)
