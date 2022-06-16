@@ -16,6 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var licenseWindowController: NSWindowController!
 
   let prefsView = PrefsView(logger: logger)
+  var connectMenuItem: NSMenuItem!
+  var disconnectMenuItem: NSMenuItem!
 
   private var statusItem: NSStatusItem!
 
@@ -45,13 +47,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func setupMenus() {
     let menu = NSMenu()
+    menu.autoenablesItems = false
 
-    let connectMenuItem = NSMenuItem(
+    connectMenuItem = NSMenuItem(
       title: "Connect", action: #selector(didTapConnect), keyEquivalent: "c")
     menu.addItem(connectMenuItem)
 
-    let disconnectMenuItem = NSMenuItem(
+    disconnectMenuItem = NSMenuItem(
       title: "Disconnect", action: #selector(didTapDisconnect), keyEquivalent: "d")
+    disconnectMenuItem.isEnabled = false
     menu.addItem(disconnectMenuItem)
 
     let logsMenuItem = NSMenuItem(title: "Logs", action: #selector(didTapLogs), keyEquivalent: "l")
@@ -109,8 +113,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       return
     }
 
-    changeStatusBarButton(symbolName: "hourglass", description: "connecting")
+    connectMenuItem.isEnabled = false
+    disconnectMenuItem.isEnabled = true
 
+    changeStatusBarButton(symbolName: "hourglass", description: "connecting")
     animateStatusBar(statusItem: statusItem)
 
     let username = NSUserName()
@@ -132,6 +138,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
           }
         } else {
           DispatchQueue.main.async {
+            self.disconnectMenuItem.isEnabled = false
+            self.connectMenuItem.isEnabled = true
             self.changeStatusBarButton(symbolName: "shield.slash", description: "disconnected")
           }
         }
@@ -146,6 +154,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     removeDNSAndVPNInterface()
     killHelper()
     log("Disconnect")
+    disconnectMenuItem.isEnabled = false
+    connectMenuItem.isEnabled = true
     changeStatusBarButton(symbolName: "shield.slash", description: "disconnected")
   }
 

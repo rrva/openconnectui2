@@ -11,8 +11,8 @@
 		<string>identifier &quot;se.rrva.OpenConnectUI2&quot; and anchor apple generic and certificate leaf[subject.CN] = &quot;Apple Development: ragnar.rova@gmail.com (U34QC433V8)&quot; and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>666</string>
+	<string>680</string>
 	<key>CFBundleShortVersionString</key>
-	<string>"1.666"</string>
+	<string>"1.680"</string>
 </dict>
 </plist>
