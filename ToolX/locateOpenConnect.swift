@@ -28,9 +28,17 @@ func locateOpenConnectVpnC(_ openConnectPath: String?) -> String? {
   }
   let url = NSURL(fileURLWithPath: openConnectPath!)
   if let dirUrl = url.deletingLastPathComponent?.path {
-    let extraUrl = NSURL(fileURLWithPath: "\(dirUrl)/../etc/vpnc-script")
-    if extraUrl.standardized?.path != nil {
-      return canonicalPath(extraUrl.standardized!.path)
+    let vpncScript = NSURL(fileURLWithPath: "\(dirUrl)/../etc/vpnc-script")
+    if let path = vpncScript.standardized?.path {
+      let vpncScriptPath = canonicalPath(path)
+      if vpncScriptPath == nil {
+        let vpncScriptNewLocation = NSURL(fileURLWithPath: "\(dirUrl)/../etc/vpnc/vpnc-script")
+        if let path = vpncScriptNewLocation.standardized?.path {
+          return canonicalPath(path)
+        }
+      } else {
+        return vpncScriptPath
+      }
     }
   }
   return nil
