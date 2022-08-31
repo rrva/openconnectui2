@@ -111,11 +111,11 @@ func startOpenConnect(
       logger.log(
         maskPassword(line.trimmingCharacters(in: .whitespacesAndNewlines), password: password))
       if line.starts(with: "openconnect not found") {
-          reply(false)
-        }
-        if line.starts(with: "Established") {
-          service()?.openConnectPid { pid in
-            logger.log("PID \(pid)")
+        reply(false)
+      }
+      if line.starts(with: "Established") {
+        service()?.openConnectPid { pid in
+          logger.log("PID \(pid)")
           noteExit(pid: pid, withReply: reply)
         }
         reply(true)
@@ -126,8 +126,12 @@ func startOpenConnect(
       if line.starts(with: "Session terminated by server; exiting.") {
         reply(false)
       }
-      if line.contains("fgets (stdin): Resource temporarily unavailable") {
-        logger.log("Perhaps you entered the wrong password or your password expired?")
+      if line.starts(with: "fgets (stdin): Resource temporarily unavailable") {
+        logger.log("Perhaps you entered the wrong username/password or your password expired?")
+        reply(false)
+      }
+      if line.starts(with: "fgets (stdin): Inappropriate ioctl for device") {
+        logger.log("Perhaps you entered the wrong username/password or your password expired?")
         reply(false)
       }
       if line.starts(with: "VPNGATEWAY=") {
