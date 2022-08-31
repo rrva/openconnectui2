@@ -41,10 +41,8 @@ func doStartOpenConnect(
   } catch {
     NSLog("Failed to kill: \(error)")
   }
-  setenv("OPENCONNECT_PASSWORD", String(describing: password), 1)
   setenv("AD_USERNAME", username, 1)
-  setenv("LC_MESSAGES", "C", 1)
-  setenv("LANG", "C", 1)
+  setenv("LC_MESSAGES", "en_US.UTF-8", 1)
 
   let programPath = Bundle.main.executablePath.unsafelyUnwrapped
   guard let openConnect = locateOpenConnect() else {
@@ -65,13 +63,16 @@ func doStartOpenConnect(
     return
   }
   let command = """
-    echo $OPENCONNECT_PASSWORD | \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --user=$AD_USERNAME \(vpnHost)
+    \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --user=$AD_USERNAME \(vpnHost)
     """
 
   do {
     NSLog(command)
     let pipe = Pipe()
-    let task = try safeShell(command, pipe: pipe)
+    let inputPipe = Pipe()
+    let task = try safeShell(command, pipe: pipe, inputPipe: inputPipe)
+    inputPipe.fileHandleForWriting.write(password.data(using: .utf8)!)
+    inputPipe.fileHandleForWriting.closeFile()
     reply(pipe.fileHandleForReading)
     task.waitUntilExit()
   } catch {
