@@ -16,7 +16,6 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
   )
   kevent(procKqueue, &changes, 1, nil, 0, nil)
 
-
   DispatchQueue.global(qos: .default).async {
     while true {
       var event = kevent()

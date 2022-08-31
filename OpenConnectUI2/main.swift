@@ -10,7 +10,10 @@ func main() {
   do {
     let resourceValues = try Bundle.main.bundleURL.resourceValues(forKeys: [.volumeIsReadOnlyKey])
     if (resourceValues.volumeIsReadOnly ?? false) == true {
-      modalDialog(messageText: "Read-only app location", informativeText: "Please move this app to the Applications folder and open it from there to allow updates")
+      modalDialog(
+        messageText: "Read-only app location",
+        informativeText:
+          "Please move this app to the Applications folder and open it from there to allow updates")
     }
   } catch {
     print(error)
@@ -55,10 +58,10 @@ extension CommandLine {
 }
 
 func modalDialog(messageText: String, informativeText: String) {
-    let alert = NSAlert()
-    alert.messageText = messageText
-    alert.informativeText = informativeText
-    alert.alertStyle = .warning
-    alert.addButton(withTitle: "OK")
-    alert.runModal()
+  let alert = NSAlert()
+  alert.messageText = messageText
+  alert.informativeText = informativeText
+  alert.alertStyle = .warning
+  alert.addButton(withTitle: "OK")
+  alert.runModal()
 }
