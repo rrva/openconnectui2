@@ -20,9 +20,7 @@ func connectionIsValid(connection: NSXPCConnection) -> Bool {
   NSLog("Local certificates: \(localCertificates)")
   NSLog("Remote certificates: \(remoteCertificates)")
 
-  let remoteApp = NSRunningApplication.init(processIdentifier: pid)
-
-  if remoteApp != nil && !remoteCertificates.isEmpty {
+  if !remoteCertificates.isEmpty {
 
     let policy = SecPolicyCreateBasicX509()
 

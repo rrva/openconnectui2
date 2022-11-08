@@ -7,7 +7,13 @@ public protocol ToolXProtocol {
     username: String,
     password: String,
     vpnHost: String,
-    withReply reply: @escaping (FileHandle) -> Void)
+    programPath: String,
+    withReply reply: @escaping (FileHandle) -> Void
+  )
+  func runVpnC(
+    env: [String:String],
+    withReply reply: @escaping (FileHandle) -> Void
+  )
   func stopOpenConnect(withReply reply: @escaping (String) -> Void)
   func removeDNSAndVPNInterface(
     vpnGateway: String, tunDev: String,

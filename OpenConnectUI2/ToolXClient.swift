@@ -50,6 +50,20 @@ func killHelper() {
   service()?.die()
 }
 
+func runVpnC(env: [String: String], done: DispatchSemaphore) {
+  logger.log("Running vpnc")
+  service()?.runVpnC(env: env) { response in
+    guard let reader = LineReader(fileHandle: response) else {
+      return
+    }
+    logger.log("Got vpnc response")
+    reader.forEach { line in
+      logger.log(line.trimmingCharacters(in: .newlines))
+    }
+    done.signal()
+  }
+}
+
 func isHelperInstalled(reply: @escaping (Bool) -> Void) {
   let versionChecked = DispatchSemaphore(value: 0)
   if let version = Bundle.main.infoDictionary?["CFBundleVersion"] as? String {
@@ -100,8 +114,9 @@ func startOpenConnect(
   host: String,
   withReply reply: @escaping (Bool) -> Void
 ) {
+  let programPath = Bundle.main.executablePath.unsafelyUnwrapped
   service()?.startOpenConnect(
-    localUser: localUser, username: username, password: password, vpnHost: host
+    localUser: localUser, username: username, password: password, vpnHost: host, programPath: programPath
   ) { response in
     guard let reader = LineReader(fileHandle: response) else {
       return

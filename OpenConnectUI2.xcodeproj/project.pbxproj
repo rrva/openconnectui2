@@ -20,7 +20,6 @@
 		17B30B3227C70ABA00E8818E /* animateStatusbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3127C70ABA00E8818E /* animateStatusbar.swift */; };
 		17B30B3427C70B2D00E8818E /* adUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3327C70B2D00E8818E /* adUsername.swift */; };
 		17B30B3627C70EE100E8818E /* ToolXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3527C70EE100E8818E /* ToolXProtocol.swift */; };
-		17B30B3827C70F7B00E8818E /* runVpnC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3727C70F7B00E8818E /* runVpnC.swift */; };
 		17B30B3B27C70FDA00E8818E /* connectionIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3927C70FB100E8818E /* connectionIsValid.swift */; };
 		17B30B3D27C710D600E8818E /* appUpgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3C27C710D600E8818E /* appUpgrade.swift */; };
 		17B30B3F27C7114500E8818E /* ToolXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3E27C7114500E8818E /* ToolXProtocol.swift */; };
@@ -86,7 +85,6 @@
 		17B30B3127C70ABA00E8818E /* animateStatusbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animateStatusbar.swift; sourceTree = "<group>"; };
 		17B30B3327C70B2D00E8818E /* adUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adUsername.swift; sourceTree = "<group>"; };
 		17B30B3527C70EE100E8818E /* ToolXProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXProtocol.swift; sourceTree = "<group>"; };
-		17B30B3727C70F7B00E8818E /* runVpnC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = runVpnC.swift; sourceTree = "<group>"; };
 		17B30B3927C70FB100E8818E /* connectionIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectionIsValid.swift; sourceTree = "<group>"; };
 		17B30B3C27C710D600E8818E /* appUpgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUpgrade.swift; sourceTree = "<group>"; };
 		17B30B3E27C7114500E8818E /* ToolXProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXProtocol.swift; sourceTree = "<group>"; };
@@ -144,7 +142,6 @@
 				177882B4278A384800135919 /* main.swift */,
 				17A827B1279F47AD0000F96B /* Info-Debug.plist */,
 				17B30B3927C70FB100E8818E /* connectionIsValid.swift */,
-				17B30B3727C70F7B00E8818E /* runVpnC.swift */,
 				17B30B3C27C710D600E8818E /* appUpgrade.swift */,
 				17B30B4227C7122200E8818E /* performUpgrade.swift */,
 				17B30B4027C711C000E8818E /* locateOpenConnect.swift */,
@@ -348,7 +345,6 @@
 				17B30B4927C714F800E8818E /* regexp.swift in Sources */,
 				17B30B4727C714AD00E8818E /* safeShell.swift in Sources */,
 				17AFD3CA279AFFF800A1315A /* ToolXService.swift in Sources */,
-				17B30B3827C70F7B00E8818E /* runVpnC.swift in Sources */,
 				17B30B3D27C710D600E8818E /* appUpgrade.swift in Sources */,
 				17B30B3F27C7114500E8818E /* ToolXProtocol.swift in Sources */,
 				17E546C02790849500FA05F4 /* VPNCleanup.swift in Sources */,
@@ -400,7 +396,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 711;
+				CURRENT_PROJECT_VERSION = 748;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -434,7 +430,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 711;
+				CURRENT_PROJECT_VERSION = 748;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -586,7 +582,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 711;
+				CURRENT_PROJECT_VERSION = 748;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -620,7 +616,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 711;
+				CURRENT_PROJECT_VERSION = 748;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;

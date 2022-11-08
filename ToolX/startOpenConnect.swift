@@ -8,6 +8,7 @@ func doStartOpenConnect(
   username: String,
   password: String,
   vpnHost: String,
+  programPath: String,
   withReply reply: @escaping (FileHandle) -> Void
 ) {
 
@@ -44,7 +45,6 @@ func doStartOpenConnect(
   setenv("AD_USERNAME", username, 1)
   setenv("LC_MESSAGES", "en_US.UTF-8", 1)
 
-  let programPath = Bundle.main.executablePath.unsafelyUnwrapped
   guard let openConnect = locateOpenConnect() else {
     let pipe = Pipe()
     if #available(macOS 10.15.4, *) {

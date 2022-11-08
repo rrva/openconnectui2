@@ -4,46 +4,51 @@ import Network
 import SwiftUI
 
 func main() {
-
-  let app = NSApplication.shared
-
-  do {
-    let resourceValues = try Bundle.main.bundleURL.resourceValues(forKeys: [.volumeIsReadOnlyKey])
-    if (resourceValues.volumeIsReadOnly ?? false) == true {
-      modalDialog(
-        messageText: "Read-only app location",
-        informativeText:
-          "Please move this app to the Applications folder and open it from there to allow updates")
-    }
-  } catch {
-    print(error)
-  }
-
-  let authorized = DispatchSemaphore(value: 0)
-  let installed = DispatchSemaphore(value: 0)
-  checkHelperInstallation { isInstalled in
-    if isInstalled == false {
-      logger.log("Installing helper")
-      installHelper(authorized: authorized, installed: installed)
-    } else {
-      authorized.signal()
-      installed.signal()
-    }
-  }
-
-  _ = authorized.wait(timeout: .now() + 60.0)
-  _ = installed.wait(timeout: .now() + 10.0)
-
-  if #available(macOS 12.0, *) {
-    let delegate = AppDelegate()
-    app.delegate = delegate
-
-    _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+  let arguments = CommandLine.arguments
+  if arguments.contains("vpnc") {
+    let done = DispatchSemaphore(value: 0)
+    runVpnC(env: ProcessInfo.processInfo.environment, done: done)
+    _ = done.wait(timeout: .now() + 60.0)
   } else {
-    print("Only works in macOS 12.0 or newer")
-    exit(1)
-  }
+    let app = NSApplication.shared
 
+    do {
+      let resourceValues = try Bundle.main.bundleURL.resourceValues(forKeys: [.volumeIsReadOnlyKey])
+      if (resourceValues.volumeIsReadOnly ?? false) == true {
+        modalDialog(
+          messageText: "Read-only app location",
+          informativeText:
+            "Please move this app to the Applications folder and open it from there to allow updates")
+      }
+    } catch {
+      print(error)
+    }
+
+    let authorized = DispatchSemaphore(value: 0)
+    let installed = DispatchSemaphore(value: 0)
+    checkHelperInstallation { isInstalled in
+      if isInstalled == false {
+        logger.log("Installing helper")
+        installHelper(authorized: authorized, installed: installed)
+      } else {
+        authorized.signal()
+        installed.signal()
+      }
+    }
+
+    _ = authorized.wait(timeout: .now() + 60.0)
+    _ = installed.wait(timeout: .now() + 10.0)
+
+    if #available(macOS 12.0, *) {
+      let delegate = AppDelegate()
+      app.delegate = delegate
+
+      _ = NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv)
+    } else {
+      print("Only works in macOS 12.0 or newer")
+      exit(1)
+    }
+  }
 }
 
 main()
