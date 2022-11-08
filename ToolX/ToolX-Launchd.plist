@@ -4,10 +4,12 @@
 <dict>
 	<key>Label</key>
 	<string>se.rrva.OpenConnectUI2.ToolX</string>
-<key>MachServices</key>
-    <dict>
-        <key>se.rrva.OpenConnectUI2.ToolX</key>
-        <true/>
-    </dict>
+	<key>WaitForDebug</key>
+	<false/>
+	<key>MachServices</key>
+	<dict>
+		<key>se.rrva.OpenConnectUI2.ToolX</key>
+		<true/>
+	</dict>
 </dict>
 </plist>
