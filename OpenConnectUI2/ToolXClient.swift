@@ -125,36 +125,36 @@ func startOpenConnect(
     reader.forEach { line in
       logger.log(
         maskPassword(line.trimmingCharacters(in: .whitespacesAndNewlines), password: password))
-      if line.starts(with: "openconnect not found") {
+      if line.hasPrefix("openconnect not found") {
         reply(false)
       }
-      if line.starts(with: "Established") {
+      if line.hasPrefix("Established") {
         service()?.openConnectPid { pid in
           logger.log("PID \(pid)")
           noteExit(pid: pid, withReply: reply)
         }
         reply(true)
       }
-      if line.starts(with: "Reconnect failed") {
+      if line.hasPrefix("Reconnect failed") {
         reply(false)
       }
-      if line.starts(with: "Session terminated by server; exiting.") {
+      if line.hasSuffix("; exiting.") {
         reply(false)
       }
-      if line.starts(with: "fgets (stdin): Resource temporarily unavailable") {
+      if line.hasPrefix("fgets (stdin): Resource temporarily unavailable") {
         logger.log("Perhaps you entered the wrong username/password or your password expired?")
         reply(false)
       }
-      if line.starts(with: "fgets (stdin): Inappropriate ioctl for device") {
+      if line.hasPrefix("fgets (stdin): Inappropriate ioctl for device") {
         logger.log("Perhaps you entered the wrong username/password or your password expired?")
         reply(false)
       }
-      if line.starts(with: "VPNGATEWAY=") {
+      if line.hasPrefix("VPNGATEWAY=") {
         UserDefaults.standard.set(
           line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines),
           forKey: "lastVpnGateway")
       }
-      if line.starts(with: "TUNDEV=") {
+      if line.hasPrefix("TUNDEV=") {
         UserDefaults.standard.set(
           line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines),
           forKey: "lastTunDev")
