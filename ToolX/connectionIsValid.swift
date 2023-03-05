@@ -70,17 +70,27 @@ class ToolXDelegate: NSObject, NSXPCListenerDelegate {
   func listener(_ listener: NSXPCListener, shouldAcceptNewConnection newConnection: NSXPCConnection)
     -> Bool
   {
-    if !connectionIsValid(connection: newConnection) {
 
-      NSLog("Codesign certificate validation failed")
+    if #available(macOS 13.0, *) {
+      newConnection.setCodeSigningRequirement(
+        """
+        (anchor apple generic and certificate leaf [subject.CN] = "Developer ID Application: Ragnar Rova (3563RJWBQP)" and certificate leaf [issuer.CN] = "Developer ID Certification Authority" and certificate [issuer.OU] = "Apple Certification Authority" and certificate [issuer.CN] = "Apple Root CA") or (anchor apple generic and certificate leaf [subject.CN] = "Apple Development: Ragnar Rova (U34QC433V8)" and certificate leaf [issuer.CN] = "Apple Worldwide Developer Relations Certification Authority" and certificate [issuer.CN] = "Apple Root CA")
+        """)
+    } else {
+      if !connectionIsValid(connection: newConnection) {
 
-      return false
+        NSLog("Codesign certificate validation failed")
+
+        return false
+      }
     }
+
     let exportedObject = ToolXService()
     newConnection.exportedInterface = NSXPCInterface(with: ToolXProtocol.self)
     newConnection.exportedObject = exportedObject
     newConnection.resume()
     return true
+
   }
 }
 
