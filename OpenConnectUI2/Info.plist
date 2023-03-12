@@ -5,13 +5,13 @@
 	<key>CFBundleShortVersionString</key>
 	<string>"1.755"</string>
 	<key>CFBundleVersion</key>
-	<string>755</string>
+	<string>756</string>
 	<key>LSUIElement</key>
 	<true/>
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>se.rrva.OpenConnectUI2.ToolX</key>
-		<string>anchor apple generic and identifier "se.rrva.OpenConnectUI2.ToolX" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = "3563RJWBQP")</string>
+		<string>identifier "se.rrva.OpenConnectUI2.ToolX" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Ragnar Rova (U34QC433V8)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</dict>
 	<key>license</key>
 	<string>string Copyright © 2022 Ragnar Rova

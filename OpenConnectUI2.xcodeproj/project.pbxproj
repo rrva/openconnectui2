@@ -312,7 +312,7 @@
 		176CF4E4279C8EDF00604C6C /* Increment Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -324,7 +324,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/bash;
 			shellScript = "agvtool next-version -all ; xcrun agvtool new-marketing-version \\\"1.$(agvtool what-version | sed -n 2p |tr -d ' ')\\\"\n";
 		};
@@ -396,7 +396,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 755;
+				CURRENT_PROJECT_VERSION = 756;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -430,7 +430,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 755;
+				CURRENT_PROJECT_VERSION = 756;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -582,7 +582,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 755;
+				CURRENT_PROJECT_VERSION = 756;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -616,7 +616,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 755;
+				CURRENT_PROJECT_VERSION = 756;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
