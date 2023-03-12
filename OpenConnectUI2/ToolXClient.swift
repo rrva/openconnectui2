@@ -47,6 +47,7 @@ func performUpgrade(download: FileHandle, downloadSize: Int, logs: Logs, upgrade
 }
 
 func killHelper() {
+    
   service()?.die()
 }
 
@@ -151,13 +152,15 @@ func startOpenConnect(
         reply(false)
       }
       if line.hasPrefix("VPNGATEWAY=") {
-        UserDefaults.standard.set(
-          line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines),
+          let lastVpnGateway: String = line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+          UserDefaults.standard.set(
+            lastVpnGateway,
           forKey: "lastVpnGateway")
       }
       if line.hasPrefix("TUNDEV=") {
-        UserDefaults.standard.set(
-          line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines),
+          let tunDev: String = line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+          UserDefaults.standard.set(
+            tunDev,
           forKey: "lastTunDev")
       }
     }

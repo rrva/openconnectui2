@@ -45,6 +45,10 @@ class ToolXService: NSObject, ToolXProtocol {
     task.environment = filteredEnv
     task.executableURL = URL(fileURLWithPath: vpnC)
     NSLog("Running \(vpnC)")
+    let vpnGateway = filteredEnv["VPNGATEWAY"]
+    pipe.fileHandleForWriting.write("VPNGATEWAY=\(vpnGateway ?? "")\n".data(using: .utf8)!)
+    let tunDev = filteredEnv["TUNDEV"]
+    pipe.fileHandleForWriting.write("TUNDEV=\(tunDev ?? "")\n".data(using: .utf8)!)
     do {
       try task.run()
     } catch {
