@@ -116,7 +116,8 @@ func startOpenConnect(
 ) {
   let programPath = Bundle.main.executablePath.unsafelyUnwrapped
   service()?.startOpenConnect(
-    localUser: localUser, username: username, password: password, vpnHost: host, programPath: programPath
+    localUser: localUser, username: username, password: password, vpnHost: host,
+    programPath: programPath
   ) { response in
     guard let reader = LineReader(fileHandle: response) else {
       return

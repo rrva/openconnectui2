@@ -11,7 +11,7 @@ public protocol ToolXProtocol {
     withReply reply: @escaping (FileHandle) -> Void
   )
   func runVpnC(
-    env: [String:String],
+    env: [String: String],
     withReply reply: @escaping (FileHandle) -> Void
   )
   func stopOpenConnect(withReply reply: @escaping (String) -> Void)

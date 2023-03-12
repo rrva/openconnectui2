@@ -56,16 +56,16 @@ func connectionIsValid(connection: NSXPCConnection) -> Bool {
         NSLog("Found a valid client (fingerprint #2)")
         return true
       }
-        
-    let validCert3 = [
-      "Apple Development: Ragnar Rova (U34QC433V8)",
-      "Apple Worldwide Developer Relations Certification Authority", "Apple Root CA",
-    ]
 
-    if names == validCert3 {
-      NSLog("Found a valid client (fingerprint #3)")
-      return true
-    }
+      let validCert3 = [
+        "Apple Development: Ragnar Rova (U34QC433V8)",
+        "Apple Worldwide Developer Relations Certification Authority", "Apple Root CA",
+      ]
+
+      if names == validCert3 {
+        NSLog("Found a valid client (fingerprint #3)")
+        return true
+      }
       return false
     } else {
       NSLog("Got invalid secResult: \(secResult.rawValue)")

@@ -5,12 +5,13 @@ func removeDNSAndVPNInterface(
   vpnGateway: String, tunDev: String, internalIp4Address: String,
   withReply reply: @escaping (String) -> Void
 ) {
-  if !hostMatcher.matches(vpnGateway) {
-    reply("Invalid characters in vpnGateway")
+  if vpnGateway != "" && !hostMatcher.matches(vpnGateway) {
+    reply("Invalid characters in vpnGateway: [\(vpnGateway)]")
     return
   }
   let out = ToolX.removeDNSAndVPNInterface(
     vpnGateway: vpnGateway, tunDev: tunDev, internalIp4Address: internalIp4Address)
+
   do {
     let pipe = Pipe()
     let task = try safeShell("route delete \(vpnGateway)", pipe: pipe)
@@ -71,12 +72,13 @@ func removeDNSAndVPNInterface(vpnGateway: String, tunDev: String, internalIp4Add
 func doRemoveDNSAndVPNInterface(
   _ vpnGateway: String, _ reply: (String) -> Void, _ tunDev: String, _ internalIp4Address: String
 ) {
-  if !hostMatcher.matches(vpnGateway) {
-    reply("Invalid characters in vpnGateway")
+  if vpnGateway != "" && !hostMatcher.matches(vpnGateway) {
+    reply("Invalid characters in vpnGateway [\(vpnGateway)]")
     return
   }
   let out = ToolX.removeDNSAndVPNInterface(
     vpnGateway: vpnGateway, tunDev: tunDev, internalIp4Address: internalIp4Address)
+
   do {
     let pipe = Pipe()
     let task = try safeShell("route delete \(vpnGateway)", pipe: pipe)
@@ -84,5 +86,6 @@ func doRemoveDNSAndVPNInterface(
   } catch {
     NSLog("\(error)")
   }
+
   reply(out)
 }

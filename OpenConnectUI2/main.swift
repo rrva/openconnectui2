@@ -18,7 +18,8 @@ func main() {
         modalDialog(
           messageText: "Read-only app location",
           informativeText:
-            "Please move this app to the Applications folder and open it from there to allow updates")
+            "Please move this app to the Applications folder and open it from there to allow updates"
+        )
       }
     } catch {
       print(error)
