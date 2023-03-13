@@ -228,7 +228,6 @@
 				17D749E1278A2A29004D43CF /* Resources */,
 				17BD60E7279A2C7000C2E4D0 /* Embed Privileged Helper */,
 				171023CA27C8160D00EAC415 /* Add license to plist */,
-				176CF4E4279C8EDF00604C6C /* Increment Build Number */,
 			);
 			buildRules = (
 			);
@@ -309,25 +308,6 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/libexec/PlistBuddy -c \"Set :license string $(cat LICENSE)\" ${INFOPLIST_FILE}\n";
 		};
-		176CF4E4279C8EDF00604C6C /* Increment Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 8;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Increment Build Number";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/bash;
-			shellScript = "agvtool next-version -all ; xcrun agvtool new-marketing-version \\\"1.$(agvtool what-version | sed -n 2p |tr -d ' ')\\\"\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -396,7 +376,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 763;
+				CURRENT_PROJECT_VERSION = 764;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -430,7 +410,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 763;
+				CURRENT_PROJECT_VERSION = 764;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -582,7 +562,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 763;
+				CURRENT_PROJECT_VERSION = 764;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -616,7 +596,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 763;
+				CURRENT_PROJECT_VERSION = 764;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
