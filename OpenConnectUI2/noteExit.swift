@@ -4,6 +4,7 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
   let procKqueue = kqueue()
   if procKqueue == -1 {
     logger.log("Error creating kqueue")
+    return
   }
 
   var changes = kevent(
@@ -14,7 +15,11 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
     data: 0,
     udata: nil
   )
-  kevent(procKqueue, &changes, 1, nil, 0, nil)
+  if kevent(procKqueue, &changes, 1, nil, 0, nil) == -1 {
+      logger.log("Error adding kevent")
+      close(procKqueue)
+      return
+  }
 
   DispatchQueue.global(qos: .default).async {
     while true {
@@ -28,9 +33,9 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
         break
       } else {
         logger.log("Error reading kevent")
-        close(procKqueue)
         break
       }
     }
+    close(procKqueue)
   }
 }
