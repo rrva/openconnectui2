@@ -47,7 +47,7 @@ func performUpgrade(download: FileHandle, downloadSize: Int, logs: Logs, upgrade
 }
 
 func killHelper() {
-    
+
   service()?.die()
 }
 
@@ -151,16 +151,34 @@ func startOpenConnect(
         logger.log("Perhaps you entered the wrong username/password or your password expired?")
         reply(false)
       }
+      if line.hasPrefix("Failed to reconnect to host")
+        && line.hasSuffix("Can't assign requested address\n")
+      {
+        logger.log("Possibly invalid routing detected, did you switch IP address?")
+        removeDNSAndVPNInterface()
+      }
+      if line.hasPrefix("getaddrinfo failed for host") {
+        logger.log("Invalid DNS settings detected, restoring settings from backup")
+        service()?.restoreDNS { restoreReply in
+          logger.log("Restored DNS servers to: \(restoreReply), trying to restart")
+          startOpenConnect(localUser: localUser, username: username, password: password, host: host)
+          { reconnectReply in
+            reply(reconnectReply)
+          }
+        }
+      }
       if line.hasPrefix("VPNGATEWAY=") {
-          let lastVpnGateway: String = line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-          UserDefaults.standard.set(
-            lastVpnGateway,
+        let lastVpnGateway: String = line.split(separator: "=")[1].trimmingCharacters(
+          in: CharacterSet.whitespacesAndNewlines)
+        UserDefaults.standard.set(
+          lastVpnGateway,
           forKey: "lastVpnGateway")
       }
       if line.hasPrefix("TUNDEV=") {
-          let tunDev: String = line.split(separator: "=")[1].trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-          UserDefaults.standard.set(
-            tunDev,
+        let tunDev: String = line.split(separator: "=")[1].trimmingCharacters(
+          in: CharacterSet.whitespacesAndNewlines)
+        UserDefaults.standard.set(
+          tunDev,
           forKey: "lastTunDev")
       }
     }

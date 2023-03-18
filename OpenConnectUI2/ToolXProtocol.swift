@@ -18,6 +18,7 @@ public protocol ToolXProtocol {
   func removeDNSAndVPNInterface(
     vpnGateway: String, tunDev: String,
     internalIp4Address: String, withReply reply: @escaping (String) -> Void)
+  func restoreDNS(withReply reply: @escaping (String) -> Void)
   func version(withReply reply: @escaping (String) -> Void)
   func die()
   func openConnectPid(withReply reply: @escaping (pid_t) -> Void)

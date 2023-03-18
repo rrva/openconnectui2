@@ -2,6 +2,10 @@ import AppKit
 import Foundation
 
 class ToolXService: NSObject, ToolXProtocol {
+  func restoreDNS(withReply reply: @escaping (String) -> Void) {
+    reply(doRestoreDNS() ?? "")
+  }
+
   func runVpnC(env: [String: String], withReply reply: @escaping (FileHandle) -> Void) {
     let openConnect = locateOpenConnect()
     let vpnC = locateOpenConnectVpnC(openConnect).unsafelyUnwrapped
@@ -45,6 +49,10 @@ class ToolXService: NSObject, ToolXProtocol {
     task.environment = filteredEnv
     task.executableURL = URL(fileURLWithPath: vpnC)
     NSLog("Running \(vpnC)")
+    let reason = filteredEnv["reason"]
+    if reason == "connect" {
+      backupDNS()
+    }
     let vpnGateway = filteredEnv["VPNGATEWAY"]
     pipe.fileHandleForWriting.write("VPNGATEWAY=\(vpnGateway ?? "")\n".data(using: .utf8)!)
     let tunDev = filteredEnv["TUNDEV"]

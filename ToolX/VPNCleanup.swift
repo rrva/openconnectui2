@@ -22,6 +22,81 @@ func removeDNSAndVPNInterface(
   reply(out)
 }
 
+func getDefaultRouteInterface() -> String? {
+  let dynamicStore = SCDynamicStoreCreate(nil, "NetworkSettings" as CFString, nil, nil)
+  let key = "State:/Network/Global/IPv4" as CFString
+  guard let value = SCDynamicStoreCopyValue(dynamicStore, key) as? [String: AnyObject],
+    let primaryInterface = value["PrimaryInterface"] as? String
+  else {
+    print("Could not find the default route interface.")
+    return nil
+  }
+  return primaryInterface
+}
+
+func userFriendlyInterfaceName(for interface: String) -> String? {
+  let ifName = interface as CFString
+  guard let networkInterfaces = SCNetworkInterfaceCopyAll() as? [SCNetworkInterface] else {
+    print("Could not get network interfaces.")
+    return nil
+  }
+
+  for networkInterface in networkInterfaces {
+    if let bsdName = SCNetworkInterfaceGetBSDName(networkInterface),
+      bsdName as String == interface
+    {
+      return SCNetworkInterfaceGetLocalizedDisplayName(networkInterface) as String?
+    }
+  }
+  return nil
+}
+
+func backupDNS() {
+  if let dynRef = SCDynamicStoreCreate(nil, "OpenConnectUI2-ToolX" as CFString, nil, nil),
+    let dnsInformation = SCDynamicStoreCopyValue(dynRef, "State:/Network/Global/DNS" as CFString)
+  {
+    SCDynamicStoreSetValue(dynRef, "Backup:/Network/Global/DNS" as CFString, dnsInformation)
+  }
+}
+
+func doRestoreDNS() -> String? {
+  if let defaultInterface = getDefaultRouteInterface() {
+    if let userFriendlyName = userFriendlyInterfaceName(for: defaultInterface) {
+      return restoreDNSFromBackup(interfaceName: userFriendlyName)
+    } else {
+      return "Unable to get user-friendly interface name for \(defaultInterface)"
+    }
+  } else {
+    return "Unable to find default network interface to reset DNS for"
+  }
+}
+
+func restoreDNSFromBackup(interfaceName: String) -> String? {
+  let dynRef = SCDynamicStoreCreate(nil, "OpenConnectUI2-ToolX" as CFString, nil, nil)
+  if let restoredDNSInformation = SCDynamicStoreCopyValue(
+    dynRef, "Backup:/Network/Global/DNS" as CFString)
+  {
+    if let serverAddresses = restoredDNSInformation["ServerAddresses"] as? [String] {
+      let process = Process()
+      process.executableURL = URL(fileURLWithPath: "/usr/sbin/networksetup")
+      process.arguments = ["-setdnsservers", interfaceName] + serverAddresses
+
+      let outputPipe = Pipe()
+      process.standardOutput = outputPipe
+
+      do {
+        try process.run()
+        process.waitUntilExit()
+        return "DNS servers restored for interface: \(interfaceName) to \(serverAddresses)"
+      } catch {
+        return "Error running networksetup command: \(error)"
+      }
+    }
+
+  }
+  return nil
+}
+
 func callback(store: SCDynamicStore, changedKeys: CFArray, context: UnsafeMutableRawPointer?) {
   guard context != nil else { return }
 }

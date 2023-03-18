@@ -155,12 +155,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     disconnectMenuItem.isEnabled = false
     connectMenuItem.isEnabled = true
     changeStatusBarButton(symbolName: "shield.slash", description: "disconnected")
-      
-    DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+
+    DispatchQueue.main.asyncAfter(
+      deadline: .now() + .seconds(4),
+      execute: {
         self.log("Stopping helper")
         killHelper()
-    })
-    
+      })
+
   }
 
   @objc func didTapLogs() {

@@ -16,9 +16,9 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
     udata: nil
   )
   if kevent(procKqueue, &changes, 1, nil, 0, nil) == -1 {
-      logger.log("Error adding kevent")
-      close(procKqueue)
-      return
+    logger.log("Error adding kevent")
+    close(procKqueue)
+    return
   }
 
   DispatchQueue.global(qos: .default).async {
