@@ -133,7 +133,10 @@ func startOpenConnect(
       if line.hasPrefix("Established") {
         service()?.openConnectPid { pid in
           logger.log("PID \(pid)")
-          noteExit(pid: pid, withReply: reply)
+          noteExit(pid: pid) {
+            removeDNSAndVPNInterface()
+            reply(false)
+          }
         }
         reply(true)
       }

@@ -1,6 +1,6 @@
 import Foundation
 
-func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
+func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
   let procKqueue = kqueue()
   if procKqueue == -1 {
     logger.log("Error creating kqueue")
@@ -22,14 +22,16 @@ func noteExit(pid: pid_t, withReply reply: @escaping (Bool) -> Void) {
   }
 
   DispatchQueue.global(qos: .default).async {
+    var exitSignalled = false
     while true {
       var event = kevent()
       let status = kevent(procKqueue, nil, 0, &event, 1, nil)
       if status == 0 {
         logger.log("Timeout")
-      } else if status > 0 {
+      } else if status > 0 && !exitSignalled {
+        exitSignalled = true
         logger.log("OpenConnect exited")
-        reply(false)
+        onExit()
         break
       } else {
         logger.log("Error reading kevent")
