@@ -134,7 +134,10 @@ func startOpenConnect(
         service()?.openConnectPid { pid in
           logger.log("PID \(pid)")
           noteExit(pid: pid) {
-            removeDNSAndVPNInterface()
+            logger.log("Removing possibly left-over DNS settings")
+            service()?.restoreDNS { restoreReply in
+              logger.log("Restored DNS servers to: \(restoreReply)")
+            }
             reply(false)
           }
         }
