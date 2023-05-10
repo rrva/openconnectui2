@@ -1,6 +1,15 @@
 import Foundation
 
+import Dispatch
+
+var registeredPids = [pid_t: Int32]()
+
 func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
+
+  if registeredPids.keys.contains(pid) {
+    return
+  }
+
   let procKqueue = kqueue()
   if procKqueue == -1 {
     logger.log("Error creating kqueue")
@@ -21,6 +30,8 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
     return
   }
 
+  registeredPids[pid] = procKqueue
+
   DispatchQueue.global(qos: .default).async {
     var exitSignalled = false
     while true {
@@ -32,12 +43,14 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
         exitSignalled = true
         logger.log("OpenConnect exited")
         onExit()
+
+        registeredPids[pid] = nil
+        close(procKqueue)
         break
       } else {
         logger.log("Error reading kevent")
         break
       }
     }
-    close(procKqueue)
   }
 }
