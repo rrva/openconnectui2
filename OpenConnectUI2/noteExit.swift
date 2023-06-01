@@ -5,8 +5,9 @@ import Dispatch
 var registeredPids = [pid_t: Int32]()
 
 func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
-
+  logger.log("Registering exit hook for pid \(pid)")
   if registeredPids.keys.contains(pid) {
+    logger.log("Exit hook already registered for pid \(pid)")
     return
   }
 
@@ -25,7 +26,7 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
     udata: nil
   )
   if kevent(procKqueue, &changes, 1, nil, 0, nil) == -1 {
-    logger.log("Error adding kevent")
+    logger.log("Error adding kevent for pid \(pid)")
     close(procKqueue)
     return
   }

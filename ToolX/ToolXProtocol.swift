@@ -21,7 +21,6 @@ public protocol ToolXProtocol {
   func restoreDNS(withReply reply: @escaping (String) -> Void)
   func version(withReply reply: @escaping (String) -> Void)
   func die()
-  func openConnectPid(withReply reply: @escaping (pid_t) -> Void)
   @available(macOS 10.15.4, *)
   func upgrade(
     download: FileHandle,

@@ -131,17 +131,18 @@ func startOpenConnect(
         reply(false)
       }
       if line.hasPrefix("Established") {
-        service()?.openConnectPid { pid in
-          logger.log("PID \(pid)")
-          noteExit(pid: pid) {
-            logger.log("Removing possibly left-over DNS settings")
-            service()?.restoreDNS { restoreReply in
-              logger.log("Restored DNS servers to: \(restoreReply)")
-            }
-            reply(false)
-          }
-        }
         reply(true)
+      }
+      if line.hasPrefix("Continuing in background;") {
+          if let pid = extractPid(from: line) {
+              noteExit(pid: pid) {
+                logger.log("Removing possibly left-over DNS settings")
+                service()?.restoreDNS { restoreReply in
+                  logger.log("Restored DNS servers to: \(restoreReply)")
+                }
+                reply(false)
+              }
+          }
       }
       if line.hasPrefix("Reconnect failed") {
         reply(false)
@@ -200,3 +201,20 @@ func maskPassword(_ line: String, password: String) -> String {
     return line
   }
 }
+
+func extractPid(from string: String) -> pid_t? {
+    let regex = try? NSRegularExpression(pattern: "pid (\\d+)")
+    let nsString = string as NSString
+    let results = regex?.matches(in: string, options: [], range: NSMakeRange(0, nsString.length))
+
+    let pids: [pid_t] = results?.flatMap { result in
+        (1..<result.numberOfRanges).compactMap { rangeIndex in
+            let range = result.range(at: rangeIndex)
+            let match = nsString.substring(with: range)
+            return pid_t(match)
+        }
+    } ?? []
+
+    return pids.first
+}
+

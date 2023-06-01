@@ -50,9 +50,6 @@ class ToolXService: NSObject, ToolXProtocol {
     task.executableURL = URL(fileURLWithPath: vpnC)
     NSLog("Running \(vpnC)")
     let reason = filteredEnv["reason"]
-    if reason == "connect" {
-      backupDNS()
-    }
     let vpnGateway = filteredEnv["VPNGATEWAY"]
     pipe.fileHandleForWriting.write("VPNGATEWAY=\(vpnGateway ?? "")\n".data(using: .utf8)!)
     let tunDev = filteredEnv["TUNDEV"]
@@ -65,10 +62,6 @@ class ToolXService: NSObject, ToolXProtocol {
     }
     reply(pipe.fileHandleForReading)
     task.waitUntilExit()
-  }
-
-  func openConnectPid(withReply reply: @escaping (pid_t) -> Void) {
-    reply(findOpenConnectPid())
   }
 
   @available(macOS 10.15.4, *)
