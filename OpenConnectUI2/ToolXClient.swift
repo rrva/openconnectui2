@@ -143,6 +143,7 @@ func startOpenConnect(
                 reply(false)
               }
           }
+          reply(true)
       }
       if line.hasPrefix("Reconnect failed") {
         reply(false)
