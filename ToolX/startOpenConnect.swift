@@ -63,7 +63,7 @@ func doStartOpenConnect(
     return
   }
   let command = """
-    \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --user=$AD_USERNAME \(vpnHost)
+    \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --useragent=AnyConnect --user=$AD_USERNAME \(vpnHost)
     """
 
   do {
