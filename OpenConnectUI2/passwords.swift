@@ -2,61 +2,45 @@ import Foundation
 import ServiceManagement
 
 func addOrUpdatePassword(_ service: String, account: String, password: String) -> Bool {
+  let passwordData = password.data(using: .utf8)!
+  let query: [String: Any] = [
+    kSecClass as String: kSecClassGenericPassword,
+    kSecAttrService as String: service,
+    kSecAttrAccount as String: account,
+  ]
 
-  var item: SecKeychainItem?
+  let attributesToUpdate: [String: Any] = [
+    kSecValueData as String: passwordData
+  ]
 
-  var status = SecKeychainFindGenericPassword(
-    nil,
-    UInt32(service.utf8.count),
-    service,
-    UInt32(account.utf8.count),
-    account,
-    nil,
-    nil,
-    &item
-  )
+  var status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
 
-  if item != nil {
-    status = SecKeychainItemModifyContent(item!, nil, UInt32(password.utf8.count), password)
-    return status == noErr
-  } else {
-    status = SecKeychainAddGenericPassword(
-      nil,
-      UInt32(service.utf8.count),
-      service,
-      UInt32(account.utf8.count),
-      account,
-      UInt32(password.utf8.count),
-      password,
-      nil)
-    return status == errSecSuccess
+  if status == errSecItemNotFound {
+    var newQuery = query
+    newQuery[kSecValueData as String] = passwordData
+    status = SecItemAdd(newQuery as CFDictionary, nil)
   }
+
+  return status == errSecSuccess
 }
 
 func getPassword(_ service: String, account: String) -> String? {
-  var passwordLength: UInt32 = 0
-  var password: UnsafeMutableRawPointer?
+  let query: [String: Any] = [
+    kSecClass as String: kSecClassGenericPassword,
+    kSecAttrService as String: service,
+    kSecAttrAccount as String: account,
+    kSecMatchLimit as String: kSecMatchLimitOne,
+    kSecReturnData as String: true,
+  ]
 
-  let status = SecKeychainFindGenericPassword(
-    nil,
-    UInt32(service.utf8.count),
-    service,
-    UInt32(account.utf8.count),
-    account,
-    &passwordLength,
-    &password,
-    nil
-  )
+  var item: AnyObject?
+  let status = SecItemCopyMatching(query as CFDictionary, &item)
 
-  if status == errSecSuccess {
-    guard password != nil else { return nil }
-    let result =
-      NSString(
-        bytes: password!, length: Int(passwordLength),
-        encoding: String.Encoding.utf8.rawValue) as String?
-    SecKeychainItemFreeContent(nil, password)
-    return result
+  guard status == errSecSuccess, let passwordData = item as? Data,
+    let password = String(data: passwordData, encoding: .utf8)
+  else {
+    return nil
   }
 
-  return nil
+  return password
 }

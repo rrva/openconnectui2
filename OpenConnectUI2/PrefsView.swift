@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import SwiftUI
 
@@ -5,8 +6,8 @@ import SwiftUI
 struct PrefsView: View {
   @ObservedObject var userSettings = UserSettings()
   @State private var openConnectPath: String = ""
-  private var logger: Logger
-  init(logger: Logger) {
+  private var logger: Logger?
+  init(logger: Logger?) {
     self.logger = logger
   }
 
@@ -36,7 +37,18 @@ struct PrefsView: View {
         }.textFieldStyle(.roundedBorder)
         Spacer().frame(idealHeight: 0)
       }
-    }.frame(minWidth: 100, maxWidth: .infinity, minHeight: 150, maxHeight: 150).padding(24)
+    }
+    .onDisappear {
+      self.userSettings.forceUpdatePassword()
+    }
+    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 150, maxHeight: 150).padding(24)
+  }
+}
+
+@available(macOS 12.0, *)
+struct PrefsView_Previews: PreviewProvider {
+  static var previews: some View {
+    PrefsView(logger: nil)
   }
 }
 
@@ -44,31 +56,54 @@ class UserSettings: ObservableObject {
   @Published var username: String {
     didSet {
       UserDefaults.standard.set(username, forKey: "username")
+      updatePasswordDebounced()
     }
   }
-
   @Published var host: String {
     didSet {
       UserDefaults.standard.set(host, forKey: "host")
     }
   }
-
   @Published var password: String {
     didSet {
-      let result = addOrUpdatePassword("openconnect", account: username, password: password)
-      if result == false {
-        logger.log("Failed adding or updating password")
-      } else {
-        logger.log("Password updated")
-      }
+      updatePasswordDebounced()
     }
   }
 
+  private var updatePasswordWorkItem: DispatchWorkItem?
+  private let debounceInterval: TimeInterval = 0.5
+  private let queue = DispatchQueue(label: "com.yourapp.userSettings")
+
   init() {
-    let usernameStr = UserDefaults.standard.object(forKey: "username") as? String ?? ""
-    let hostStr = UserDefaults.standard.object(forKey: "host") as? String ?? ""
-    username = usernameStr
-    host = hostStr
-    password = getPassword("openconnect", account: usernameStr) ?? ""
+    let username = UserDefaults.standard.object(forKey: "username") as? String ?? ""
+    self.username = username
+    self.host = UserDefaults.standard.object(forKey: "host") as? String ?? ""
+    self.password = getPassword("openconnect", account: username) ?? ""
+  }
+
+  private func updatePasswordDebounced() {
+    updatePasswordWorkItem?.cancel()
+
+    let workItem = DispatchWorkItem { [weak self] in
+      guard let self = self else { return }
+      let result = addOrUpdatePassword(
+        "openconnect", account: self.username, password: self.password)
+      if result {
+        logger.log("Password updated")
+      } else {
+        logger.log("Failed to update password")
+      }
+    }
+
+    updatePasswordWorkItem = workItem
+    queue.asyncAfter(deadline: .now() + debounceInterval, execute: workItem)
+  }
+
+  func forceUpdatePassword() {
+    queue.sync {
+      updatePasswordWorkItem?.perform()
+      updatePasswordWorkItem?.cancel()
+      updatePasswordWorkItem = nil
+    }
   }
 }
