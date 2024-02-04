@@ -51,16 +51,8 @@ func userFriendlyInterfaceName(for interface: String) -> String? {
   return nil
 }
 
-func doRestoreDNS() -> String? {
-  if let defaultInterface = getDefaultRouteInterface() {
-    if let userFriendlyName = userFriendlyInterfaceName(for: defaultInterface) {
-      return resetDNS(interfaceName: userFriendlyName)
-    } else {
-      return "Unable to get user-friendly interface name for \(defaultInterface)"
-    }
-  } else {
-    return "Unable to find default network interface to reset DNS for"
-  }
+func doRestoreDNS(networkInterface: String) -> String? {
+  return resetDNS(interfaceName: networkInterface)
 }
 
 func resetDNS(interfaceName: String) -> String? {

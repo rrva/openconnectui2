@@ -124,6 +124,18 @@ func startOpenConnect(
       return
     }
 
+    var lastUsedNetworkInterface: String? = nil
+    service()?.defaultNetworkInterface {
+      response in
+      if !response.starts(with: "error:") {
+        lastUsedNetworkInterface = response
+        logger.log(
+          "Last used network interface to perform cleanup for: \(lastUsedNetworkInterface ?? "unknown")"
+        )
+      } else {
+        logger.log("Error finding default network interface: \(response)")
+      }
+    }
     reader.forEach { line in
       logger.log(
         maskPassword(line.trimmingCharacters(in: .whitespacesAndNewlines), password: password))
@@ -134,16 +146,18 @@ func startOpenConnect(
         reply(true)
       }
       if line.hasPrefix("Continuing in background;") {
-          if let pid = extractPid(from: line) {
-              noteExit(pid: pid) {
-                logger.log("Removing possibly left-over DNS settings")
-                service()?.restoreDNS { restoreReply in
-                  logger.log("Restored DNS servers to: \(restoreReply)")
-                }
-                reply(false)
+        if let pid = extractPid(from: line) {
+          noteExit(pid: pid) {
+            if let networkInterface = lastUsedNetworkInterface {
+              logger.log("Removing possibly left-over DNS settings for \(networkInterface)")
+              service()?.restoreDNS(networkInterface: networkInterface) { restoreReply in
+                logger.log("Restore DNS servers: \(restoreReply)")
               }
+            }
+            reply(false)
           }
-          reply(true)
+        }
+        reply(true)
       }
       if line.hasPrefix("Reconnect failed") {
         reply(false)
@@ -166,13 +180,19 @@ func startOpenConnect(
         removeDNSAndVPNInterface()
       }
       if line.hasPrefix("getaddrinfo failed for host") {
-        logger.log("Invalid DNS settings detected, restoring settings from backup")
-        service()?.restoreDNS { restoreReply in
-          logger.log("Restored DNS servers to: \(restoreReply), trying to restart")
-          startOpenConnect(localUser: localUser, username: username, password: password, host: host)
-          { reconnectReply in
-            reply(reconnectReply)
+        logger.log("Invalid DNS settings detected")
+        if let networkInterface = lastUsedNetworkInterface {
+          logger.log("Restoring DNS settings for \(networkInterface)")
+          service()?.restoreDNS(networkInterface: networkInterface) { restoreReply in
+            logger.log("Restored DNS servers to: \(restoreReply), trying to restart")
+            startOpenConnect(
+              localUser: localUser, username: username, password: password, host: host
+            ) { reconnectReply in
+              reply(reconnectReply)
+            }
           }
+        } else {
+          logger.log("last used network interface unknown")
         }
       }
       if line.hasPrefix("VPNGATEWAY=") {
@@ -204,18 +224,18 @@ func maskPassword(_ line: String, password: String) -> String {
 }
 
 func extractPid(from string: String) -> pid_t? {
-    let regex = try? NSRegularExpression(pattern: "pid (\\d+)")
-    let nsString = string as NSString
-    let results = regex?.matches(in: string, options: [], range: NSMakeRange(0, nsString.length))
+  let regex = try? NSRegularExpression(pattern: "pid (\\d+)")
+  let nsString = string as NSString
+  let results = regex?.matches(in: string, options: [], range: NSMakeRange(0, nsString.length))
 
-    let pids: [pid_t] = results?.flatMap { result in
-        (1..<result.numberOfRanges).compactMap { rangeIndex in
-            let range = result.range(at: rangeIndex)
-            let match = nsString.substring(with: range)
-            return pid_t(match)
-        }
+  let pids: [pid_t] =
+    results?.flatMap { result in
+      (1..<result.numberOfRanges).compactMap { rangeIndex in
+        let range = result.range(at: rangeIndex)
+        let match = nsString.substring(with: range)
+        return pid_t(match)
+      }
     } ?? []
 
-    return pids.first
+  return pids.first
 }
-

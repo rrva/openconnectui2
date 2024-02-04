@@ -2,8 +2,8 @@ import AppKit
 import Foundation
 
 class ToolXService: NSObject, ToolXProtocol {
-  func restoreDNS(withReply reply: @escaping (String) -> Void) {
-    reply(doRestoreDNS() ?? "")
+  func restoreDNS(networkInterface: String, withReply reply: @escaping (String) -> Void) {
+    reply(doRestoreDNS(networkInterface: networkInterface) ?? "")
   }
 
   func runVpnC(env: [String: String], withReply reply: @escaping (FileHandle) -> Void) {
@@ -48,12 +48,17 @@ class ToolXService: NSObject, ToolXProtocol {
     }
     task.environment = filteredEnv
     task.executableURL = URL(fileURLWithPath: vpnC)
-    NSLog("Running \(vpnC)")
     let reason = filteredEnv["reason"]
+    NSLog("Running \(vpnC) reason: \(String(describing: reason))")
     let vpnGateway = filteredEnv["VPNGATEWAY"]
     pipe.fileHandleForWriting.write("VPNGATEWAY=\(vpnGateway ?? "")\n".data(using: .utf8)!)
     let tunDev = filteredEnv["TUNDEV"]
     pipe.fileHandleForWriting.write("TUNDEV=\(tunDev ?? "")\n".data(using: .utf8)!)
+    let internalIp4DNS = filteredEnv["INTERNAL_IP4_DNS"]
+    pipe.fileHandleForWriting.write(
+      "INTERNAL_IP4_DNS=\(internalIp4DNS ?? "")\n".data(using: .utf8)!)
+    let ciscoSplitDNS = filteredEnv["CISCO_SPLIT_DNS"]
+    pipe.fileHandleForWriting.write("CISCO_SPLIT_DNS=\(ciscoSplitDNS ?? "")\n".data(using: .utf8)!)
     do {
       try task.run()
     } catch {
@@ -83,6 +88,18 @@ class ToolXService: NSObject, ToolXProtocol {
       reply(version)
     } else {
       reply("error")
+    }
+  }
+
+  func defaultNetworkInterface(withReply reply: @escaping (String) -> Void) {
+    if let defaultInterface = getDefaultRouteInterface() {
+      if let userFriendlyName = userFriendlyInterfaceName(for: defaultInterface) {
+        reply(userFriendlyName)
+      } else {
+        reply("error: Unable to get user-friendly interface name for \(defaultInterface)")
+      }
+    } else {
+      reply("error: Unable to find default network interface to reset DNS for")
     }
   }
 

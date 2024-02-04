@@ -1,6 +1,5 @@
-import Foundation
-
 import Dispatch
+import Foundation
 
 var registeredPids = [pid_t: Int32]()
 
