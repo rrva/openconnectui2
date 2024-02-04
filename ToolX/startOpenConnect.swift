@@ -2,7 +2,8 @@ import Foundation
 
 let localUserNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-]+$")
 let userNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._%+\\-@]+$")
-let hostMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-/:+%?&=]+$")
+let hostMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-/:+%?=]+$")
+let customArgsMatcher = try! NSRegularExpression(pattern: "^[a-zA-Z0-9\\s.\\-_=,:/]+$")
 
 func doStartOpenConnect(
   localUser: String,
@@ -10,10 +11,19 @@ func doStartOpenConnect(
   password: String,
   vpnHost: String,
   programPath: String,
+  customArgs: String?,
   withReply reply: @escaping (FileHandle) -> Void
 ) {
 
   let pipe = Pipe()
+  if let args = customArgs {
+    if !customArgsMatcher.matches(args) {
+      pipe.fileHandleForWriting.write(
+        "Invalid characters in custom args: [\(args)]\n".data(using: .utf8)!)
+      reply(pipe.fileHandleForReading)
+      return
+    }
+  }
   if !localUserNameMatcher.matches(localUser) {
     pipe.fileHandleForWriting.write(
       "Invalid characters in localUser: [\(localUser)]\n".data(using: .utf8)!)
@@ -64,7 +74,7 @@ func doStartOpenConnect(
     return
   }
   let command = """
-    \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --useragent=AnyConnect --user=$AD_USERNAME \(vpnHost)
+    \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --useragent=AnyConnect --user=$AD_USERNAME  \(customArgs ?? "") \(vpnHost)
     """
 
   do {

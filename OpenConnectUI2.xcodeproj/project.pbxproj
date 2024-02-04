@@ -18,7 +18,6 @@
 		17AFD3CC279B005400A1315A /* ToolXClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17AFD3CB279B005400A1315A /* ToolXClient.swift */; };
 		17B30B3027C709A600E8818E /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B2F27C709A600E8818E /* WindowController.swift */; };
 		17B30B3227C70ABA00E8818E /* animateStatusbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3127C70ABA00E8818E /* animateStatusbar.swift */; };
-		17B30B3427C70B2D00E8818E /* adUsername.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3327C70B2D00E8818E /* adUsername.swift */; };
 		17B30B3627C70EE100E8818E /* ToolXProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3527C70EE100E8818E /* ToolXProtocol.swift */; };
 		17B30B3B27C70FDA00E8818E /* connectionIsValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3927C70FB100E8818E /* connectionIsValid.swift */; };
 		17B30B3D27C710D600E8818E /* appUpgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B30B3C27C710D600E8818E /* appUpgrade.swift */; };
@@ -82,7 +81,6 @@
 		17AFD3CB279B005400A1315A /* ToolXClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXClient.swift; sourceTree = "<group>"; };
 		17B30B2F27C709A600E8818E /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		17B30B3127C70ABA00E8818E /* animateStatusbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = animateStatusbar.swift; sourceTree = "<group>"; };
-		17B30B3327C70B2D00E8818E /* adUsername.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adUsername.swift; sourceTree = "<group>"; };
 		17B30B3527C70EE100E8818E /* ToolXProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolXProtocol.swift; sourceTree = "<group>"; };
 		17B30B3927C70FB100E8818E /* connectionIsValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectionIsValid.swift; sourceTree = "<group>"; };
 		17B30B3C27C710D600E8818E /* appUpgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appUpgrade.swift; sourceTree = "<group>"; };
@@ -173,23 +171,22 @@
 			isa = PBXGroup;
 			children = (
 				17D749F9278A2CC7004D43CF /* Info.plist */,
-				17D749E6278A2A29004D43CF /* AppDelegate.swift */,
 				17D749EA278A2A2A004D43CF /* Assets.xcassets */,
 				17D749EF278A2A2A004D43CF /* OpenConnectUI2.entitlements */,
 				17D749F5278A2AD9004D43CF /* main.swift */,
+				17D749E6278A2A29004D43CF /* AppDelegate.swift */,
 				17D749F7278A2B35004D43CF /* LogView.swift */,
-				1788499B2791E447009E536C /* PrefsView.swift */,
 				17C3379F27A5DC09005A497D /* AboutView.swift */,
+				1788499B2791E447009E536C /* PrefsView.swift */,
 				17E7DA3A27C280A4006CF78E /* UpgradeView.swift */,
 				171023C827C813D800EAC415 /* LicenseView.swift */,
 				176CF4E9279D79B400604C6C /* LineReader.swift */,
 				17AFD3CB279B005400A1315A /* ToolXClient.swift */,
 				17B30B3527C70EE100E8818E /* ToolXProtocol.swift */,
 				17B30B2F27C709A600E8818E /* WindowController.swift */,
-				176CF4E6279D6BD300604C6C /* passwords.swift */,
 				176CF4E1279C5CA800604C6C /* installHelper.swift */,
+				176CF4E6279D6BD300604C6C /* passwords.swift */,
 				17C337A127A5E344005A497D /* Updater.swift */,
-				17B30B3327C70B2D00E8818E /* adUsername.swift */,
 				17A827B2279F47BD0000F96B /* Info-Debug.plist */,
 				17B30B3127C70ABA00E8818E /* animateStatusbar.swift */,
 				17C2BEDE27E7A970007D0916 /* noteExit.swift */,
@@ -336,7 +333,6 @@
 				17B30B3227C70ABA00E8818E /* animateStatusbar.swift in Sources */,
 				17B30B3027C709A600E8818E /* WindowController.swift in Sources */,
 				17AFD3CC279B005400A1315A /* ToolXClient.swift in Sources */,
-				17B30B3427C70B2D00E8818E /* adUsername.swift in Sources */,
 				17D749E7278A2A29004D43CF /* AppDelegate.swift in Sources */,
 				1788499C2791E447009E536C /* PrefsView.swift in Sources */,
 				17C337A027A5DC09005A497D /* AboutView.swift in Sources */,
@@ -372,7 +368,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 781;
+				CURRENT_PROJECT_VERSION = 782;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -406,7 +402,7 @@
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 781;
+				CURRENT_PROJECT_VERSION = 782;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -560,7 +556,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 781;
+				CURRENT_PROJECT_VERSION = 782;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -594,7 +590,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 781;
+				CURRENT_PROJECT_VERSION = 782;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 3563RJWBQP;
 				ENABLE_HARDENED_RUNTIME = YES;

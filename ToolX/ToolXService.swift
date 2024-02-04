@@ -109,11 +109,13 @@ class ToolXService: NSObject, ToolXProtocol {
     password: String,
     vpnHost: String,
     programPath: String,
+    customArgs: String?,
     withReply reply: @escaping (FileHandle) -> Void
   ) {
     doStartOpenConnect(
       localUser: localUser, username: username, password: password, vpnHost: vpnHost,
       programPath: programPath,
+      customArgs: customArgs,
       withReply: reply)
   }
 

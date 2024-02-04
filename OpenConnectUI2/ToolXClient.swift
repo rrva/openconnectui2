@@ -112,13 +112,13 @@ func stopOpenConnect() {
 
 func startOpenConnect(
   localUser: String, username: String, password: String,
-  host: String,
+  host: String, customArgs: String?,
   withReply reply: @escaping (Bool) -> Void
 ) {
   let programPath = Bundle.main.executablePath.unsafelyUnwrapped
   service()?.startOpenConnect(
     localUser: localUser, username: username, password: password, vpnHost: host,
-    programPath: programPath
+    programPath: programPath, customArgs: customArgs
   ) { response in
     guard let reader = LineReader(fileHandle: response) else {
       return
@@ -186,7 +186,8 @@ func startOpenConnect(
           service()?.restoreDNS(networkInterface: networkInterface) { restoreReply in
             logger.log("Restored DNS servers to: \(restoreReply), trying to restart")
             startOpenConnect(
-              localUser: localUser, username: username, password: password, host: host
+              localUser: localUser, username: username, password: password, host: host,
+              customArgs: customArgs
             ) { reconnectReply in
               reply(reconnectReply)
             }

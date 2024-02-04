@@ -15,7 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   var aboutWindowController: NSWindowController!
   var licenseWindowController: NSWindowController!
 
-  let prefsView = PrefsView(logger: logger)
+  var prefsView: PrefsView!
+  let userSettings = UserSettings()
   var connectMenuItem: NSMenuItem!
   var disconnectMenuItem: NSMenuItem!
 
@@ -27,6 +28,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     flags: [], queue: DispatchQueue.global(qos: .background))
 
   func applicationDidFinishLaunching(_: Notification) {
+    prefsView = PrefsView(userSettings: userSettings, logger: logger)
+
     concurrentQueue = DispatchQueue(
       label: "ConcurrentQueue", qos: .default, attributes: .concurrent)
     statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -92,12 +95,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
   }
 
   @objc func didTapConnect() {
-    let host = prefsView.getUserSettings().host
-    let adUserName = prefsView.getUserSettings().username
+    let host = userSettings.host
+    let adUserName = userSettings.username
 
-    if adUserName == "" || host == "" {
+    if adUserName == "" || host == "" || !userSettings.hostIsValid
+      || (userSettings.customArgsEnabled && !userSettings.customArgsIsValid)
+      || !userSettings.usernameIsValid
+    {
+      self.log("Prefs invalid, showing prefs dialog")
       if prefsWindowController == nil {
-        prefsWindowController = WindowController(hostedView: PrefsView(logger: logger))
+        prefsWindowController = WindowController(hostedView: prefsView)
       }
       prefsWindowController.showWindow(nil)
       DispatchQueue.main.async {
@@ -112,7 +119,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
       log("Failed to read openconnect password from keychain")
       return
     }
-
+    let customArgsEnabled = userSettings.customArgsEnabled
+    let customArgs = customArgsEnabled ? userSettings.customArgs : nil
+    self.log("custom args: \(customArgs ?? "not set")")
     connectMenuItem.isEnabled = false
     disconnectMenuItem.isEnabled = true
 
@@ -129,7 +138,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         localUser: username,
         username: adUserName,
         password: openConnectPassword.unsafelyUnwrapped,
-        host: host
+        host: host, customArgs: customArgs
 
       ) { result in
         if result == true {
@@ -179,7 +188,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @objc func didTapPrefs() {
     if prefsWindowController == nil {
-      prefsWindowController = WindowController(hostedView: PrefsView(logger: logger))
+      prefsWindowController = WindowController(hostedView: prefsView)
     }
     prefsWindowController.showWindow(nil)
     NSApp.activate(ignoringOtherApps: true)

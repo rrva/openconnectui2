@@ -8,6 +8,7 @@ public protocol ToolXProtocol {
     password: String,
     vpnHost: String,
     programPath: String,
+    customArgs: String?,
     withReply reply: @escaping (FileHandle) -> Void
   )
   func runVpnC(
