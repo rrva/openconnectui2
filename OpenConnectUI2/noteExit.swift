@@ -2,6 +2,8 @@ import Dispatch
 import Foundation
 
 var registeredPids = [pid_t: Int32]()
+var exitSemaphores = [pid_t: DispatchSemaphore]()  // Semaphore map to track exit signals
+var latestPid: pid_t?  // Track the latest registered PID
 
 func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
   logger.log("Registering exit hook for pid \(pid)")
@@ -31,6 +33,9 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
   }
 
   registeredPids[pid] = procKqueue
+  latestPid = pid  // Update latest PID
+  let semaphore = DispatchSemaphore(value: 0)
+  exitSemaphores[pid] = semaphore
 
   DispatchQueue.global(qos: .default).async {
     var exitSignalled = false
@@ -44,7 +49,13 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
         logger.log("OpenConnect exited")
         onExit()
 
-        registeredPids[pid] = nil
+        semaphore.signal()
+
+        registeredPids.removeValue(forKey: pid)
+        exitSemaphores.removeValue(forKey: pid)
+        if latestPid == pid {
+          latestPid = nil  // Reset latest PID if it's the one being removed
+        }
         close(procKqueue)
         break
       } else {
@@ -53,4 +64,21 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
       }
     }
   }
+}
+
+func waitForExit() {
+    if let pid = latestPid, let semaphore = exitSemaphores[pid] {
+        // Set a timeout for 10 seconds from now
+        let timeout = DispatchTime.now() + .seconds(10)
+        let result = semaphore.wait(timeout: timeout)
+
+        switch result {
+        case .success:
+            logger.log("Process \(pid) exited within 10 seconds.")
+        case .timedOut:
+            logger.log("Timeout: Process \(pid) did not exit within 10 seconds.")
+        }
+    } else {
+        logger.log("No process to wait for")
+    }
 }

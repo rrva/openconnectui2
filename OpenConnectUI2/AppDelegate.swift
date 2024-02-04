@@ -28,6 +28,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     flags: [], queue: DispatchQueue.global(qos: .background))
 
   func applicationDidFinishLaunching(_: Notification) {
+    NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(appWillTerminate),
+      name: NSApplication.willTerminateNotification,
+      object: nil
+    )
+
     prefsView = PrefsView(userSettings: userSettings, logger: logger)
 
     concurrentQueue = DispatchQueue(
@@ -172,6 +179,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         killHelper()
       })
 
+  }
+
+  @objc func appWillTerminate() {
+    stopOpenConnect()
+    waitForExit()
   }
 
   @objc func didTapLogs() {
