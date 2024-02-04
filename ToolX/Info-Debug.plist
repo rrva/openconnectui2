@@ -7,9 +7,9 @@
 	<key>CFBundleName</key>
 	<string>ToolX</string>
 	<key>CFBundleShortVersionString</key>
-	<string>"1.779"</string>
+	<string>"1.780"</string>
 	<key>CFBundleVersion</key>
-	<string>779</string>
+	<string>780</string>
 	<key>SMAuthorizedClients</key>
 	<array>
 		<string>identifier "se.rrva.OpenConnectUI2" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Ragnar Rova (U34QC433V8)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>

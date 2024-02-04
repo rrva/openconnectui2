@@ -1,6 +1,7 @@
 import Foundation
 
-let userNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-]+$")
+let localUserNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-]+$")
+let userNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._%+\\-@]+$")
 let hostMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-/:+%?&=]+$")
 
 func doStartOpenConnect(
@@ -13,7 +14,7 @@ func doStartOpenConnect(
 ) {
 
   let pipe = Pipe()
-  if !userNameMatcher.matches(localUser) {
+  if !localUserNameMatcher.matches(localUser) {
     pipe.fileHandleForWriting.write(
       "Invalid characters in localUser: [\(localUser)]\n".data(using: .utf8)!)
     reply(pipe.fileHandleForReading)
