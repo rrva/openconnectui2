@@ -3,7 +3,7 @@ import Foundation
 let localUserNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-]+$")
 let userNameMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._%+\\-@]+$")
 let hostMatcher = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-/:+%?=]+$")
-let customArgsMatcher = try! NSRegularExpression(pattern: "^[a-zA-Z0-9\\s.\\-_=,:/]+$")
+let customArgsMatcher = try! NSRegularExpression(pattern: "^[\\p{L}\\p{N}\\s._=,:\\/\\-]+$")
 
 func doStartOpenConnect(
   localUser: String,
@@ -48,7 +48,7 @@ func doStartOpenConnect(
     return
   }
   do {
-    let task = try safeShell("route delete -n \(vpnHost) ; pkill openconnect", pipe: pipe)
+    let task = try safeShell("pkill openconnect", pipe: pipe)
     task.waitUntilExit()
   } catch {
     NSLog("Failed to kill: \(error)")
@@ -73,15 +73,22 @@ func doStartOpenConnect(
     reply(pipe.fileHandleForReading)
     return
   }
-  let command = """
-    \(String(describing: openConnect)) -b  --pid-file /var/run/openconnect.pid -s "\(programPath) vpnc" --setuid=\(localUser) --useragent=AnyConnect --user=$AD_USERNAME  \(customArgs ?? "") \(vpnHost)
-    """
+
+  let arguments = [
+    "-b", "--pid-file", "/var/run/openconnect.pid", "-s", "\(programPath) vpnc",
+    "--setuid=\(localUser)",
+    "--useragent=AnyConnect", "--user=\(username)",
+  ]
+  let extraArguments =
+    customArgs?.split(separator: " ", omittingEmptySubsequences: true).map(String.init) ?? []
 
   do {
-    NSLog(command)
+
     let pipe = Pipe()
     let inputPipe = Pipe()
-    let task = try safeShell(command, pipe: pipe, inputPipe: inputPipe)
+    let task = try safeShellWithArgs(
+      executable: openConnect, args: arguments + extraArguments + [vpnHost], pipe: pipe,
+      inputPipe: inputPipe)
     inputPipe.fileHandleForWriting.write(password.data(using: .utf8)!)
     inputPipe.fileHandleForWriting.closeFile()
     reply(pipe.fileHandleForReading)

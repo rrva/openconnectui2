@@ -98,18 +98,17 @@ extension String {
 class UserSettings: ObservableObject {
   @Published var username: String {
     didSet {
-      usernameIsValid = username.matches(usernamePattern)
+      usernameIsValid = username.matches(regex: usernameRegex)
       if usernameIsValid {
         UserDefaults.standard.set(username, forKey: "username")
         updatePasswordDebounced()
       }
-
     }
   }
 
   var host: String {
     didSet {
-      hostIsValid = host.matches(hostPattern)
+      hostIsValid = host.matches(regex: hostRegex)
       if hostIsValid {
         UserDefaults.standard.set(host, forKey: "host")
       }
@@ -118,7 +117,7 @@ class UserSettings: ObservableObject {
 
   var customArgs: String {
     didSet {
-      customArgsIsValid = customArgs.matches(customArgsPattern)
+      customArgsIsValid = customArgs.matches(regex: customArgsRegex)
       if customArgsIsValid {
         UserDefaults.standard.set(customArgs, forKey: "customArgs")
       }
@@ -140,9 +139,9 @@ class UserSettings: ObservableObject {
   @Published var hostIsValid = true
   @Published var customArgsIsValid = true
 
-  private let usernamePattern = "^[A-Za-z0-9._%+\\-@]+$"
-  private let hostPattern = "^[A-Za-z0-9._\\-/:+%?=]+$"
-  private let customArgsPattern = "^[a-zA-Z0-9\\s.\\-_=,:/]+$"
+  private let usernameRegex = try! NSRegularExpression(pattern: "^[A-Za-z0-9._%+\\-@]+$")
+  private let hostRegex = try! NSRegularExpression(pattern: "^[A-Za-z0-9._\\-/:+%?=]+$")
+  private let customArgsRegex = try! NSRegularExpression(pattern: "^[\\p{L}\\p{N}\\s._=,:/-]+$")
 
   private var updatePasswordWorkItem: DispatchWorkItem?
   private let debounceInterval: TimeInterval = 0.5
@@ -181,5 +180,12 @@ class UserSettings: ObservableObject {
       updatePasswordWorkItem?.cancel()
       updatePasswordWorkItem = nil
     }
+  }
+}
+
+extension String {
+  func matches(regex: NSRegularExpression) -> Bool {
+    let range = NSRange(location: 0, length: self.utf16.count)
+    return regex.firstMatch(in: self, options: [], range: range) != nil
   }
 }

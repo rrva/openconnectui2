@@ -14,7 +14,8 @@ func removeDNSAndVPNInterface(
 
   do {
     let pipe = Pipe()
-    let task = try safeShell("route delete \(vpnGateway)", pipe: pipe)
+    let task = try safeShellWithArgs(
+      executable: "/sbin/route", args: ["delete", vpnGateway], pipe: pipe)
     task.waitUntilExit()
   } catch {
     NSLog("\(error)")
@@ -131,7 +132,8 @@ func doRemoveDNSAndVPNInterface(
 
   do {
     let pipe = Pipe()
-    let task = try safeShell("route delete \(vpnGateway)", pipe: pipe)
+    let task = try safeShellWithArgs(
+      executable: "/sbin/route", args: ["delete", vpnGateway], pipe: pipe)
     task.waitUntilExit()
   } catch {
     NSLog("\(error)")

@@ -67,18 +67,18 @@ func noteExit(pid: pid_t, onExit: @escaping () -> Void) {
 }
 
 func waitForExit() {
-    if let pid = latestPid, let semaphore = exitSemaphores[pid] {
-        // Set a timeout for 10 seconds from now
-        let timeout = DispatchTime.now() + .seconds(10)
-        let result = semaphore.wait(timeout: timeout)
+  if let pid = latestPid, let semaphore = exitSemaphores[pid] {
+    // Set a timeout for 10 seconds from now
+    let timeout = DispatchTime.now() + .seconds(10)
+    let result = semaphore.wait(timeout: timeout)
 
-        switch result {
-        case .success:
-            logger.log("Process \(pid) exited within 10 seconds.")
-        case .timedOut:
-            logger.log("Timeout: Process \(pid) did not exit within 10 seconds.")
-        }
-    } else {
-        logger.log("No process to wait for")
+    switch result {
+    case .success:
+      logger.log("Process \(pid) exited within 10 seconds.")
+    case .timedOut:
+      logger.log("Timeout: Process \(pid) did not exit within 10 seconds.")
     }
+  } else {
+    logger.log("No process to wait for")
+  }
 }
