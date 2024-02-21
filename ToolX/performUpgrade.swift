@@ -41,18 +41,22 @@ func performUpgrade(
       return
     }
 
-    let devSignature =
+
+      let devSignature =
       "Authority=Developer ID Application: Ragnar Rova (3563RJWBQP)\nAuthority=Developer ID Certification Authority\nAuthority=Apple Root CA\n"
 
-    let notarySignature =
-      "Authority=Apple Development: ragnar.rova@gmail.com (U34QC433V8)\nAuthority=Apple Worldwide Developer Relations Certification Authority\nAuthority=Apple Root CA\n"
+      let notarySignature =
+        "Authority=Apple Development: ragnar.rova@gmail.com (U34QC433V8)\nAuthority=Apple Worldwide Developer Relations Certification Authority\nAuthority=Apple Root CA\n"
 
-    if appSignature != devSignature && appSignature != notarySignature {
-      replyString(
-        replyPipe: replyPipe, context: "Check signature",
-        error: "Code signature does not match, not upgrading: \(appSignature)", reply: reply)
-      return
-    }
+      let devSignature2 = "sJy9dns5pPYGcSlTEijrZjM1kn0rM002gVB3yDxIbbg="
+      let validSignatures: [String] = [ devSignature.sha256(), notarySignature.sha256(), devSignature2 ].compactMap { $0 }
+
+      guard let appSignature = appSignature.sha256(), validSignatures.contains(appSignature) else  {
+          replyString(
+            replyPipe: replyPipe, context: "Check signature",
+            error: "Code signature does not match, not upgrading: \(appSignature)", reply: reply)
+          return
+      }
 
     NSLog("App signature matches")
     if appLocation.pathComponents.contains("Xcode") {
@@ -110,3 +114,4 @@ func replyData(
     replyString(replyPipe: replyPipe, context: context, error: "\(error)", reply: reply)
   }
 }
+

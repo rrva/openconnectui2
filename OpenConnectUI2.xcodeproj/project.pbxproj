@@ -39,6 +39,7 @@
 		17D749F8278A2B35004D43CF /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D749F7278A2B35004D43CF /* LogView.swift */; };
 		17E546C02790849500FA05F4 /* VPNCleanup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E546BE27907DC300FA05F4 /* VPNCleanup.swift */; };
 		17E7DA3B27C280A4006CF78E /* UpgradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E7DA3A27C280A4006CF78E /* UpgradeView.swift */; };
+		4456C85B2B86358600E824C7 /* String+SHA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4456C85A2B86358600E824C7 /* String+SHA.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +106,7 @@
 		17D749F9278A2CC7004D43CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		17E546BE27907DC300FA05F4 /* VPNCleanup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPNCleanup.swift; sourceTree = "<group>"; };
 		17E7DA3A27C280A4006CF78E /* UpgradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpgradeView.swift; sourceTree = "<group>"; };
+		4456C85A2B86358600E824C7 /* String+SHA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+SHA.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 				17B30B4627C714AD00E8818E /* safeShell.swift */,
 				17B30B4827C714F800E8818E /* regexp.swift */,
 				17B30B4A27C7161100E8818E /* stopOpenConnect.swift */,
+				4456C85A2B86358600E824C7 /* String+SHA.swift */,
 			);
 			path = ToolX;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				17B30B4927C714F800E8818E /* regexp.swift in Sources */,
 				17B30B4727C714AD00E8818E /* safeShell.swift in Sources */,
 				17AFD3CA279AFFF800A1315A /* ToolXService.swift in Sources */,
+				4456C85B2B86358600E824C7 /* String+SHA.swift in Sources */,
 				17B30B3D27C710D600E8818E /* appUpgrade.swift in Sources */,
 				17B30B3F27C7114500E8818E /* ToolXProtocol.swift in Sources */,
 				17E546C02790849500FA05F4 /* VPNCleanup.swift in Sources */,
@@ -370,7 +374,7 @@
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 791;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3563RJWBQP;
+				DEVELOPMENT_TEAM = 2TLM57CUQ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "ToolX/Info-Debug.plist";
 				MACOSX_DEPLOYMENT_TARGET = 11;
@@ -404,7 +408,7 @@
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 791;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3563RJWBQP;
+				DEVELOPMENT_TEAM = 2TLM57CUQ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = ToolX/Info.plist;
 				MACOSX_DEPLOYMENT_TARGET = 11;
@@ -558,7 +562,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 791;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3563RJWBQP;
+				DEVELOPMENT_TEAM = 2TLM57CUQ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "OpenConnectUI2/Info-Debug.plist";
@@ -592,7 +596,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 791;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3563RJWBQP;
+				DEVELOPMENT_TEAM = 2TLM57CUQ3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OpenConnectUI2/Info.plist;
