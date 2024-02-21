@@ -14,7 +14,7 @@ func newVersionAvailable(logs: Logs, _ block: @escaping (PublishedVersion) -> Vo
   guard
     let publishedURL = URL(
       string:
-        "https://gist.githubusercontent.com/rrva/4e9f3942fdfa8ab0f0e8986b93d862d9/raw/latest-version.txt?foo=\(getCurrentMillis())"
+        "https://raw.githubusercontent.com/rrva/openconnectui2/main/latest-auto-update.json?foo=\(getCurrentMillis())"
     )
   else {
     return
