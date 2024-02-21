@@ -3,15 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleShortVersionString</key>
-	<string>"1.792"</string>
+	<string>"1.794"</string>
 	<key>CFBundleVersion</key>
-	<string>792</string>
+	<string>794</string>
 	<key>LSUIElement</key>
 	<true/>
 	<key>SMPrivilegedExecutables</key>
 	<dict>
 		<key>se.rrva.OpenConnectUI2.ToolX</key>
-		<string>identifier "se.rrva.OpenConnectUI2.ToolX" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Ragnar Rova (U34QC433V8)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+		<string>identifier "se.rrva.OpenConnectUI2.ToolX" and anchor apple generic and (certificate leaf[subject.CN] = "Apple Development: Ragnar Rova (U34QC433V8)") or (certificate leaf[subject.CN] = "Apple Development: Kebne AB (2TLM57CUQ3)") and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
 	</dict>
 	<key>license</key>
 	<string>string Copyright © 2022 Ragnar Rova

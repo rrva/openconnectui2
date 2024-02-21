@@ -52,6 +52,7 @@ func connectionIsValid(connection: NSXPCConnection) -> Bool {
         "Developer ID Application: Ragnar Rova (3563RJWBQP)",
         "Developer ID Certification Authority", "Apple Root CA",
       ]
+
       if names == validCert2 {
         NSLog("Found a valid client (fingerprint #2)")
         return true
@@ -62,10 +63,31 @@ func connectionIsValid(connection: NSXPCConnection) -> Bool {
         "Apple Worldwide Developer Relations Certification Authority", "Apple Root CA",
       ]
 
+      let validCert4 = [
+          "Apple Development: Johan Rydenstam (BB538DPGHC)",
+          "Apple Worldwide Developer Relations Certification Authority", "Apple Root CA",
+      ]
+
+      let validCert5 = [
+          "Developer ID Application: Kebne AB (2TLM57CUQ3)",
+          "Developer ID Certification Authority", "Apple Root CA",
+      ]
+
       if names == validCert3 {
         NSLog("Found a valid client (fingerprint #3)")
         return true
       }
+
+      if names == validCert4 {
+        NSLog("Found a valid client (fingerprint #4)")
+        return true
+      }
+
+      if names == validCert5 {
+        NSLog("Found a valid client (fingerprint #5)")
+        return true
+      }
+
       return false
     } else {
       NSLog("Got invalid secResult: \(secResult.rawValue)")
