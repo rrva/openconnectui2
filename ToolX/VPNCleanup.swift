@@ -9,8 +9,7 @@ func removeDNSAndVPNInterface(
     reply("Invalid characters in vpnGateway: [\(vpnGateway)]")
     return
   }
-  let out = ToolX.removeDNSAndVPNInterface(
-    vpnGateway: vpnGateway, tunDev: tunDev, internalIp4Address: internalIp4Address)
+  let out = ToolX.removeDNSEntriesForVPN(tunDev: tunDev)
 
   do {
     let pipe = Pipe()
@@ -19,6 +18,10 @@ func removeDNSAndVPNInterface(
     task.waitUntilExit()
   } catch {
     NSLog("\(error)")
+  }
+
+  if let networkInterface = getDefaultRouteInterface() {
+    _ = doRestoreDNS(networkInterface: networkInterface)
   }
   reply(out)
 }
@@ -48,7 +51,6 @@ func getPrimaryNetworkService() -> String? {
 }
 
 func userFriendlyInterfaceName(for interface: String) -> String? {
-  let ifName = interface as CFString
   guard let networkInterfaces = SCNetworkInterfaceCopyAll() as? [SCNetworkInterface] else {
     print("Could not get network interfaces.")
     return nil
@@ -89,7 +91,7 @@ func callback(store: SCDynamicStore, changedKeys: CFArray, context: UnsafeMutabl
   guard context != nil else { return }
 }
 
-func removeDNSAndVPNInterface(vpnGateway: String, tunDev: String, internalIp4Address: String)
+func removeDNSEntriesForVPN(tunDev: String)
   -> String
 {
   var out = "Removing any VPN DNS entries and IP addresses for tun \(tunDev)\n"
@@ -122,7 +124,6 @@ func removeDNSAndVPNInterface(vpnGateway: String, tunDev: String, internalIp4Add
     out += "Could not find primary dns config at \(primaryDnsKey)\n"
     return out
   }
-
 
   out += "Current Primary DNS Configuration: \(currentPrimaryDNSConfig)\n"
   out += "Current DNS Configuration for \(tunDev): \(currentTunDNSConfig)\n"
@@ -158,9 +159,7 @@ func doRemoveDNSAndVPNInterface(
     reply("Invalid characters in vpnGateway [\(vpnGateway)]")
     return
   }
-  let out = ToolX.removeDNSAndVPNInterface(
-    vpnGateway: vpnGateway, tunDev: tunDev, internalIp4Address: internalIp4Address)
-
+  let out = ToolX.removeDNSEntriesForVPN(tunDev: tunDev)
   do {
     let pipe = Pipe()
     let task = try safeShellWithArgs(

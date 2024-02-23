@@ -64,13 +64,13 @@ func connectionIsValid(connection: NSXPCConnection) -> Bool {
       ]
 
       let validCert4 = [
-          "Apple Development: Johan Rydenstam (BB538DPGHC)",
-          "Apple Worldwide Developer Relations Certification Authority", "Apple Root CA",
+        "Apple Development: Johan Rydenstam (BB538DPGHC)",
+        "Apple Worldwide Developer Relations Certification Authority", "Apple Root CA",
       ]
 
       let validCert5 = [
-          "Developer ID Application: Kebne AB (2TLM57CUQ3)",
-          "Developer ID Certification Authority", "Apple Root CA",
+        "Developer ID Application: Kebne AB (2TLM57CUQ3)",
+        "Developer ID Certification Authority", "Apple Root CA",
       ]
 
       if names == validCert3 {

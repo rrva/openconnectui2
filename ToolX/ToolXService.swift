@@ -48,6 +48,9 @@ class ToolXService: NSObject, ToolXProtocol {
     }
     task.environment = filteredEnv
     task.executableURL = URL(fileURLWithPath: vpnC)
+    if let reason = filteredEnv["reason"], reason == "connect", let tunDev = filteredEnv["TUNDEV"] {
+      saveTunDevValue(tunDev)
+    }
     let reason = filteredEnv["reason"]
     NSLog("Running \(vpnC) reason: \(String(describing: reason))")
     filteredEnv.forEach { key, value in
@@ -77,6 +80,28 @@ class ToolXService: NSObject, ToolXProtocol {
 
   func die() {
     exit(EXIT_SUCCESS)
+  }
+
+  func saveTunDevValue(_ value: String) {
+    let filePath = URL(fileURLWithPath: "\(applicationSupportDirectory)/\(tunDevFilename)")
+
+    let fileManager = FileManager.default
+
+    if !fileManager.fileExists(atPath: applicationSupportDirectory) {
+      do {
+        try fileManager.createDirectory(
+          atPath: applicationSupportDirectory, withIntermediateDirectories: true, attributes: nil)
+      } catch {
+        NSLog("Failed to create directory: \(error)")
+        return
+      }
+    }
+
+    do {
+      try value.write(to: filePath, atomically: true, encoding: .utf8)
+    } catch {
+      NSLog("Failed to save TUNDEV value atomically: \(error)")
+    }
   }
 
   func version(withReply reply: @escaping (String) -> Void) {
