@@ -52,10 +52,12 @@ func performUpgrade(
       devSignature.sha256(), notarySignature.sha256(), devSignature2,
     ].compactMap { $0 }
 
+     let appSignatureOutput = "AppSignature: \(appSignature) Hash: \(appSignature.sha256())"
+
     guard let appSignature = appSignature.sha256(), validSignatures.contains(appSignature) else {
       replyString(
         replyPipe: replyPipe, context: "Check signature",
-        error: "Code signature does not match, not upgrading: \(appSignature)", reply: reply)
+        error: "Code signature does not match, not upgrading: \(appSignature) \(appSignatureOutput)", reply: reply)
       return
     }
 
