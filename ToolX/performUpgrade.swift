@@ -114,4 +114,3 @@ func replyData(
     replyString(replyPipe: replyPipe, context: context, error: "\(error)", reply: reply)
   }
 }
-

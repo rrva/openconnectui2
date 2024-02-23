@@ -149,6 +149,7 @@ func startOpenConnect(
         if let pid = extractPid(from: line) {
           noteExit(pid: pid) {
             if let networkInterface = lastUsedNetworkInterface {
+              removeDNSAndVPNInterface()
               logger.log("Removing possibly left-over DNS settings for \(networkInterface)")
               service()?.restoreDNS(networkInterface: networkInterface) { restoreReply in
                 logger.log("Restore DNS servers: \(restoreReply)")

@@ -35,6 +35,18 @@ func getDefaultRouteInterface() -> String? {
   return primaryInterface
 }
 
+func getPrimaryNetworkService() -> String? {
+  let dynamicStore = SCDynamicStoreCreate(nil, "NetworkSettings" as CFString, nil, nil)
+  let key = "State:/Network/Global/IPv4" as CFString
+  guard let value = SCDynamicStoreCopyValue(dynamicStore, key) as? [String: AnyObject],
+    let primaryInterface = value["PrimaryService"] as? String
+  else {
+    print("Could not find the primary network service.")
+    return nil
+  }
+  return primaryInterface
+}
+
 func userFriendlyInterfaceName(for interface: String) -> String? {
   let ifName = interface as CFString
   guard let networkInterfaces = SCNetworkInterfaceCopyAll() as? [SCNetworkInterface] else {
@@ -81,40 +93,59 @@ func removeDNSAndVPNInterface(vpnGateway: String, tunDev: String, internalIp4Add
   -> String
 {
   var out = "Removing any VPN DNS entries and IP addresses for tun \(tunDev)\n"
-  guard let store = SCDynamicStoreCreate(nil, "OpenConnectUI2-ToolX" as NSString, nil, nil) else {
-    out += "Could not connect SCDynamicStoreCreate\n"
+  guard let store = SCDynamicStoreCreate(nil, "OpenConnectUI2-ToolX" as CFString, nil, nil) else {
+    out += "Could not connect to SCDynamicStoreCreate\n"
     return out
   }
 
-  let dnsKey = "State:/Network/Service/\(tunDev)/DNS" as NSString
-  guard let searchDomainKeys = SCDynamicStoreCopyKeyList(store, dnsKey) as? [CFString] else {
-    out += "Could not find any DNS entries\n"
+  guard let primaryNetworkService = getPrimaryNetworkService() else {
+    out += "Could not find primary network service name\n"
     return out
   }
 
-  if searchDomainKeys.isEmpty {
-    out += "Nothing to do in \(dnsKey)\n"
+  let primaryDnsKey = "State:/Network/Service/\(primaryNetworkService)/DNS" as CFString
+  let tunDevDnsKey = "State:/Network/Service/\(tunDev)/DNS" as CFString
+
+  guard
+    let currentTunDNSConfig = SCDynamicStoreCopyValue(store, tunDevDnsKey) as? [String: AnyObject]
+  else {
+    out += "Could not find tun dns config at \(tunDevDnsKey)\n"
     return out
   }
 
-  for key in searchDomainKeys {
-    let keyStr = (key as String)
-    let ipv4Key = String(keyStr.prefix(keyStr.count - 3)) + "IPv4"
+  SCDynamicStoreRemoveValue(store, tunDevDnsKey)
 
-    if SCDynamicStoreRemoveValue(store, key) {
-      out += "removed DNS entry for \(key)\n"
+  guard
+    var currentPrimaryDNSConfig = SCDynamicStoreCopyValue(store, primaryDnsKey)
+      as? [String: AnyObject]
+  else {
+    out += "Could not find primary dns config at \(primaryDnsKey)\n"
+    return out
+  }
+
+
+  out += "Current Primary DNS Configuration: \(currentPrimaryDNSConfig)\n"
+  out += "Current DNS Configuration for \(tunDev): \(currentTunDNSConfig)\n"
+
+  let vpnDnsServers = currentTunDNSConfig["ServerAddresses"] as? [String] ?? []
+  let primaryDnsServers = currentPrimaryDNSConfig["ServerAddresses"] as? [String] ?? []
+
+  let filteredPrimaryDnsServers = primaryDnsServers.filter { !vpnDnsServers.contains($0) }
+
+  if !filteredPrimaryDnsServers.isEmpty {
+    currentPrimaryDNSConfig["ServerAddresses"] = filteredPrimaryDnsServers as AnyObject?
+
+    if SCDynamicStoreSetValue(store, primaryDnsKey, currentPrimaryDNSConfig as CFDictionary) {
+      out += "Successfully updated DNS Configuration\n"
     } else {
-      out += "Could not remove DNS entry for \(key)\n"
-
+      out += "Failed to update DNS Configuration\n"
     }
-    if SCDynamicStoreRemoveValue(store, ipv4Key as CFString) {
-      out += "removed IPv4 network address for \(ipv4Key)\n"
-      out += "\(key)\n"
+
+    if let updatedDNSConfig = SCDynamicStoreCopyValue(store, primaryDnsKey) {
+      out += "Updated DNS Configuration: \(updatedDNSConfig)\n"
     } else {
-      out += "Could not remove IPv4 network entry for \(ipv4Key)\n"
-
+      out += "No updated DNS configuration found\n"
     }
-
   }
 
   return out

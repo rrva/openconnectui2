@@ -50,15 +50,11 @@ class ToolXService: NSObject, ToolXProtocol {
     task.executableURL = URL(fileURLWithPath: vpnC)
     let reason = filteredEnv["reason"]
     NSLog("Running \(vpnC) reason: \(String(describing: reason))")
-    let vpnGateway = filteredEnv["VPNGATEWAY"]
-    pipe.fileHandleForWriting.write("VPNGATEWAY=\(vpnGateway ?? "")\n".data(using: .utf8)!)
-    let tunDev = filteredEnv["TUNDEV"]
-    pipe.fileHandleForWriting.write("TUNDEV=\(tunDev ?? "")\n".data(using: .utf8)!)
-    let internalIp4DNS = filteredEnv["INTERNAL_IP4_DNS"]
-    pipe.fileHandleForWriting.write(
-      "INTERNAL_IP4_DNS=\(internalIp4DNS ?? "")\n".data(using: .utf8)!)
-    let ciscoSplitDNS = filteredEnv["CISCO_SPLIT_DNS"]
-    pipe.fileHandleForWriting.write("CISCO_SPLIT_DNS=\(ciscoSplitDNS ?? "")\n".data(using: .utf8)!)
+    filteredEnv.forEach { key, value in
+      if !key.hasPrefix("CISCO_SPLIT_INC") {
+        pipe.fileHandleForWriting.write("\(key)=\(value)\n".data(using: .utf8)!)
+      }
+    }
     do {
       try task.run()
     } catch {
